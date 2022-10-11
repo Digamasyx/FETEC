@@ -1,0 +1,71 @@
+@import url("./root/root.css");
+
+
+/* CAROUSEL */
+.carousel-item {
+    height: 85vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#carousel_ {
+  box-shadow: 0 8px 10px var(--box-shadow-light);
+}
+  
+
+/* CARD */
+#card {
+
+    box-shadow: 0 4px 8px 0 var(--box-shadow);
+    transition: 400ms;
+    padding: var(--df-padding);
+    margin: var(--df-margin);
+}
+
+#card:hover {
+  box-shadow: 0 8px 16px 0 var(--box-shadow);
+}
+
+#card > img {
+  width: auto;
+  height: auto;
+  
+  max-width: 20vh;
+  max-height: 20vh;
+  
+}
+
+/* CARD CONTAINER */
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px 16px;
+}
+
+/* CATALOG */
+#catalog_body {
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  padding-top: 1.2em;
+  padding-bottom: 1em;
+}
+
+
+/* FOOTER */
+
+#footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--bg-col);
+  height: 2em;
+  color: #fff;
+}
