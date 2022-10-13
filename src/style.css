@@ -16,6 +16,10 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    cursor: pointer;
+}
+.carousel-caption {
+  cursor: default;
 }
 #carousel_ {
   box-shadow: 0 8px 10px var(--box-shadow-light);
@@ -42,6 +46,10 @@ body {
   max-width: 20vh;
   max-height: 20vh;
   
+}
+
+#card > img:hover {
+  cursor: pointer;
 }
 
 /* CARD CONTAINER */
