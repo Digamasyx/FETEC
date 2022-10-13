@@ -1,6 +1,12 @@
 @import url("./root/root.css");
 
 
+/* BODY GLOBALS */
+
+body {
+  
+}
+
 /* CAROUSEL */
 .carousel-item {
     height: 85vh;
