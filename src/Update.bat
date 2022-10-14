@@ -9,6 +9,4 @@ git commit -m "Auto Update"
 
 git push
 
-cls
-
 if errorlevel 0 taskkill /f /fi "WINDOWTITLE eq Update"

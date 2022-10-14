@@ -112,3 +112,12 @@ body {
 /*
   Bootstrap Changes
 */
+
+#nav_text_ {
+  font-family: "Montserrat", sans-serif;
+  font-weight: light;
+}
+#nav_text {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.349em;
+}
