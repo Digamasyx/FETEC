@@ -18,4 +18,15 @@
     --df-margin: 1em 2em;
     --df-padding: 1em 2em;
     --df-footer-padding: 1em;
+
+
+    /* Colors */
+
+      /* Footer */
+
+      --gradient-1: #3A5F3A;
+      --gradient-2: #518551;
+
+      --border-lg: #74bf74;
+      --text-col: #68ab68;
 }
