@@ -1,0 +1,8 @@
+@keyframes gradient_anim {
+    0%, 100% {
+        background-position-x: 0%;
+
+    } 50% {
+        background-position-x: 100% ;
+    }
+}
