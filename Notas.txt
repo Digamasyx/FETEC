@@ -1,0 +1,11 @@
+/* Card Padrão */
+$ = indica que o valor é aditivo a quantidade de cards presente
+
+<div id="card_$" class="card">
+    <img src="./src/img/test-user.png" alt="Icon">
+    <div class="container_">
+        <h4><b>Lorem</b></h4>
+        <p>Lorem</p>
+        </div> 
+    </img>
+</div>
