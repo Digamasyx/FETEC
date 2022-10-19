@@ -1,8 +1,11 @@
 @import url("./root/root.css");
 @import url("./media/@keyframes.css");
+@import url("./root/scrollbar.css");
 
 /* BODY GLOBALS */
-
+body {
+  overflow: auto;
+}
 
 /* CAROUSEL */
 .carousel-item {
@@ -13,7 +16,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-image: url("./img/photo-1510070009289-b5bc34383727.jfif");
+    background-image: url("../img/photo-1510070009289-b5bc34383727.jfif");
     cursor: pointer;
 }
 .carousel-caption {
