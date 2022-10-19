@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Git Init",
+            "type": "shell",
+            "command": "git init",
+            "windows": {
+                "command": "git init"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "clear": true
+            },
+            "runOptions": { "runOn": "folderOpen"}
+        }
+    ]
+}

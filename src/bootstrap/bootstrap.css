@@ -5950,7 +5950,7 @@ textarea.form-control-lg {
 
 /* rtl:options: {
   "autoRename": true,
-  "stringMap":[ {
+  "string@":[ {
     "name"    : "prev-next",
     "search"  : "prev",
     "replace" : "next"
