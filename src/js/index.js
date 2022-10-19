@@ -1,11 +1,16 @@
-const card_root = document.getElementById("card")
+import { options } from './functions/index.js'
+
 const catalog_body = document.getElementById("catalog_body")
 
 const modal = document.createElement("div")
 const modal_content = document.createElement("p")
 
 
-card_root.onclick = function() {
+catalog_body.onclick = function(event) {
+
+    if(!event.target.id.toLowerCase().includes("card")) {
+        return
+    }
 
     modal_content.innerText = "Lorem"
 
@@ -17,8 +22,6 @@ card_root.onclick = function() {
     
     modal.style.display = "block"
 
-    if(modal.style.display === "block") {
-    }
 }
 
 window.onclick = function(event) {
