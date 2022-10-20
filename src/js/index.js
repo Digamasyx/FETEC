@@ -1,4 +1,4 @@
-import { options } from './functions/index.js'
+import { options, getElementData } from './functions/index.js'
 
 const catalog_body = document.getElementById("catalog_body")
 
@@ -6,11 +6,14 @@ const modal = document.createElement("div")
 const modal_content = document.createElement("p")
 
 
-catalog_body.onclick = function(event) {
+catalog_body.addEventListener("click", (event) => {
 
     if(!event.target.id.toLowerCase().includes("card")) {
         return
     }
+    
+    const clicked_element = document.getElementById(event.target.id)
+    
 
     modal_content.innerText = "Lorem"
 
@@ -22,7 +25,7 @@ catalog_body.onclick = function(event) {
     
     modal.style.display = "block"
 
-}
+})
 
 window.onclick = function(event) {
     if (event.target == modal) {
