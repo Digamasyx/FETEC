@@ -8,7 +8,7 @@ const modal_content = document.createElement("p")
 
 catalog_body.addEventListener("click", (event) => {
 
-    if(!event.target.id.toLowerCase().includes("card")) {
+    if(event.target.id.toLowerCase().includes("catalog_body")) {
         return
     }
     

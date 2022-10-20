@@ -1,4 +1,6 @@
 {
     "git.ignoreLimitWarning": true,
-    "task.allowAutomaticTasks": "on"
+    "task.allowAutomaticTasks": "on",
+    "phpserver.phpPath": "C:\\xampp\\php\\php.exe",
+    "phpserver.browser": "chrome"
 }
