@@ -1,11 +1,15 @@
 <?php 
 $dsn = 'mysql:host=localhost;dbname=catalogo;port=8001';
-$username = 'localhost';
+$username = 'root';
+$password = null;
 
 try {
-    $db = new PDO($dsn, $username);
+    $db = new PDO($dsn, $username, $password);
 } catch (PDOException $e) {
+    $errCode = 1;
     throw new Exception($e->getMessage(), (int)$e->getCode());
+} finally {
+    $errCode = 0;
 }
 
 
