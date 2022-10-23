@@ -7,6 +7,22 @@ body {
   overflow: auto;
 }
 
+/* HEADER */
+
+#user-li > svg {
+  width: 22px;
+  height: 24px;
+}
+
+#user-li {
+  width: 42px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--bg-col) !important;
+  margin-left: 20px;
+  border-radius: 100%;
+}
+
 /* CAROUSEL */
 .carousel-item {
     height: 85vh;
@@ -170,6 +186,16 @@ footer {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* USER MODAL */
+
+#user_modal {
+  display: none;
+  z-index: 9998;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #888;
 }
 
 

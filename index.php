@@ -36,6 +36,11 @@ require_once("./src/php/imports.php");
               <li class="nav-item">
                 <a class="nav-link" id="nav_text_" href="#">Social</a>
               </li>
+              <li class="nav-item" id="user-li">
+                <a href="#" class="nav-link" id="user">
+                  <i class="fas fa-solid fa-user" id="user-icon"></i>
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -45,3 +45,30 @@ export function getElementData(element, specificElement = [null, null]) {
         }
     }
 }
+
+export function getPos(element, [vertical = 0, horizontal = 0]) {
+    const bodyPos = document.body.getBoundingClientRect();
+    const elementPos = element.getBoundingClientRect();
+
+    if (vertical == 0) {
+        if (horizontal == 0) {
+            return {
+                vertical: elementPos.top - bodyPos.top,
+                horizontal: elementPos.left - bodyPos.left
+            }
+        }
+        return {
+            horizontal: elementPos.left - bodyPos.left
+        }
+    } else if (vertical == 1) {
+        if (horizontal == 1) {
+            return {
+                vertical: elementPos.top - bodyPos.top,
+                horizontal: elementPos.left - bodyPos.left
+            }
+        }
+        return {
+            vertical: elementPos.top - bodyPos.top
+        }
+    }
+}

@@ -1,5 +1,5 @@
 <?php 
-$dsn = 'mysql:host=localhost;dbname=catalogo;port=8001';
+$dsn = 'mysql:host=localhost;dbname=catalogo;port=3306';
 $username = 'root';
 $password = null;
 
