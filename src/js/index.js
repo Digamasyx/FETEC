@@ -1,4 +1,4 @@
-import { options, getElementData, getPos } from './functions/index.js'
+import { options, getElementData, getPos, createForm } from './functions/index.js'
 
 // Catalog
 const catalog_body = document.getElementById("catalog_body")
@@ -10,9 +10,19 @@ const modal_content = document.createElement("p")
 const user_body = document.getElementById("user")
 
 const user_modal = document.createElement("div")
+const user_content = document.createElement("div")
+
 
 user_body.addEventListener("click", (event) => {
-    console.log(`Top ${getPos(user_body, [1, 0]).vertical}`)
+
+    user_modal.setAttribute("id", "user_modal")
+    user_content.setAttribute("id", "user_content")
+    user_content.appendChild(createForm(user_content).full_form)
+    user_modal.appendChild(user_content)
+
+    document.body.appendChild(user_modal)
+
+    user_modal.style.display = "block"
 })
 
 catalog_body.addEventListener("click", (event) => {
@@ -37,7 +47,23 @@ catalog_body.addEventListener("click", (event) => {
 })
 
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
         modal.style.display = "none"
     }
+    if (event.target === user_modal) {
+        user_modal.style.display = "none"
+    }
 }
+
+user_content.addEventListener("click", (event) => {
+    if (event.target.id === "input-ch") {
+        const check = document.getElementById("input-ch")
+        const pass = document.getElementById("input-pass")
+        if(check.checked) {
+            pass.setAttribute("type", "text")
+        } else {
+            pass.setAttribute("type", "password")
+        }
+
+    }
+})
