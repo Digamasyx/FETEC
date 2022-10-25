@@ -45,6 +45,7 @@ export function createReg(main_root) {
     main_root.innerHTML = ''
     var form = document.createElement("form")
     form.setAttribute("method", "post")
+    form.setAttribute("action", "index.php")
     form.innerHTML = `
     <div class="form-inline form-group align-items-center">
         <div class="form-group">
@@ -53,20 +54,20 @@ export function createReg(main_root) {
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupPrepend">#</span>
                 </div>
-                <input class="form-control" id="input-nome" type="text" placeholder="Insira seu Nome" aria-describedby="inputGroupPrepend">
+                <input class="form-control" id="input-nome" type="text" placeholder="Insira seu Nome" aria-describedby="inputGroupPrepend" name="usuario" required>
             </div
         </div>
     </div>
     <div class="form-group">
         <label for="input-email">Endereço de E-mail</label>
-        <input class="form-control" id="input-email" type="email" placeholder="Insira seu E-mail">
+        <input class="form-control" id="input-email" type="email" placeholder="Insira seu E-mail" name="email">
         <small id="emailHelp" class="form-text text-muted">Seu e-mail não será compartilhado com niguem.</small>
     </div>
     <div class="form-group">
         <label for="input-pass">Senha</label>
-        <input class="form-control" id="input-pass" type="password" placeholder="Insira sua senha">
+        <input class="form-control" id="input-pass" type="password" placeholder="Insira sua senha" name="senha" required>
         <label for="input-pass_">Senha</label>
-        <input class="form-control" id="input-pass_" type="password" placeholder="Insira novamente sua senha">
+        <input class="form-control" id="input-pass_" type="password" placeholder="Insira novamente sua senha" required>
     </div>
     <div class="form-group">
         <input class="form-check-input" id="input-ch" type="checkbox">

@@ -13,5 +13,13 @@ class DB_tables {
         $stm = $db->prepare($sql);
         $stm->execute();
     }
+
+    public function postData($post = [], $db) {
+        date_default_timezone_set("America/Bahia");
+        $data = date("Y-m-d H:i:s");
+        $sql = "INSERT INTO usuarios (nome, dataCriacao, senha) VALUES ('$post[0]', '$data', '$post[1]')";
+        $stm = $db->prepare($sql);
+        $stm->execute();
+    }
 }
 ?>

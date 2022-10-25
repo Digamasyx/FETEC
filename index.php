@@ -1,6 +1,14 @@
 <?php
 
 require_once("./src/php/imports.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if(!empty($_POST["usuario"])) {
+    $data = array($_POST["usuario"], password_hash($_POST["senha"], "2y"));
+    $db_c = new DatabaseConfig\DB_tables(db);
+    $db_c->postData($data, db);
+  }
+}
 ?>
 
 
