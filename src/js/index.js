@@ -1,5 +1,7 @@
-import { options, getElementData, getPos, createForm } from './functions/index.js'
+import * as Functions from './functions/index.js'
 
+
+var user_reg;
 // Catalog
 const catalog_body = document.getElementById("catalog_body")
 
@@ -17,12 +19,20 @@ user_body.addEventListener("click", (event) => {
 
     user_modal.setAttribute("id", "user_modal")
     user_content.setAttribute("id", "user_content")
-    user_content.appendChild(createForm(user_content).full_form)
+    user_content.appendChild(Functions.createLogin(user_content).full_form)
     user_modal.appendChild(user_content)
 
     document.body.appendChild(user_modal)
 
     user_modal.style.display = "block"
+
+
+    user_reg = document.getElementById("reg-a")
+    if (typeof user_reg !== null) {
+        user_reg.addEventListener("click", (event) => {
+                user_content.appendChild(Functions.createReg(user_content).full_form)
+        })
+    }
 })
 
 catalog_body.addEventListener("click", (event) => {
@@ -66,4 +76,18 @@ user_content.addEventListener("click", (event) => {
         }
 
     }
+    
 })
+document.body.addEventListener("click", (event) => {
+    try {
+        if (event.target.id === "reg-b") {
+            user_content.appendChild(Functions.createLogin(user_content).full_form)
+        }
+        if (event.target.id === "reg-a") {
+            user_content.appendChild(Functions.createReg(user_content).full_form)
+        }
+    } catch (e) {
+
+    }
+})
+ 

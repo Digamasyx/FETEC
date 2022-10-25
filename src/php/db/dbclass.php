@@ -1,5 +1,5 @@
 <?php 
-require_once("./src/php/imports.php");
+namespace DatabaseConfig;
 
 class DB_tables {
     public function __construct($db)

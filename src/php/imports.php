@@ -1,9 +1,9 @@
 <?php 
 // All Imports
-@require_once("./src/php/db/database.php");
+include_once ('db/database.php');
 if ($errCode !== 1) {
-    require_once("./src/php/db/dbclass.php");
-    new DB_tables($db);
+    include 'db/dbclass.php';
+    new DatabaseConfig\DB_tables(db);
 }
 
 ?>
