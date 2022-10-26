@@ -3,7 +3,7 @@ namespace DatabaseConfig;
 
 interface DB {
     public function __construct($db);
-    public function postData($post = [], $db);
+    public function postData($post = [], $db): bool;
     public function getData($get = [], $db, $Option = null, &$ref): array;
 }
 
@@ -20,12 +20,20 @@ class DB_tables implements DB {
         $stm->execute();
     }
 
-    public function postData($post = [], $db) {
+    public function postData($post = [], $db): bool {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
+        $test_exist = "SELECT * FROM usuarios WHERE nome ='$post[0]' and email = '$post[2]'";
+        $exec = $db->prepare($test_exist);
+        $exec->execute();
+        if ($exec->rowCount() == 1) {
+            return FALSE;
+        }
         $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]')";
         $stm = $db->prepare($sql);
         $stm->execute();
+
+        return TRUE;
     }
 
     public function getData($get = [], $db, $Option = null, &$ref): array {
