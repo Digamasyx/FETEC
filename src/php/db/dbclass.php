@@ -1,7 +1,13 @@
 <?php 
 namespace DatabaseConfig;
 
-class DB_tables {
+interface DB {
+    public function __construct($db);
+    public function postData($post = [], $db);
+    public function getData($get = [], $db, $Option = null, &$ref): array;
+}
+
+class DB_tables implements DB {
     public function __construct($db)
     {
         $sql = "CREATE TABLE IF NOT EXISTS usuarios (
@@ -17,9 +23,28 @@ class DB_tables {
     public function postData($post = [], $db) {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO usuarios (nome, dataCriacao, senha) VALUES ('$post[0]', '$data', '$post[1]')";
+        $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]')";
         $stm = $db->prepare($sql);
         $stm->execute();
+    }
+
+    public function getData($get = [], $db, $Option = null, &$ref): array {
+
+        $sql = "SELECT * FROM usuarios WHERE nome = '$get[0]' AND senha = '$get[1]'" or die();
+        $stm = $db->prepare($sql);
+        $stm->execute();
+
+        if ($Option != null and $stm->rowCount() == 1) {
+            return $ref = [TRUE, "Got User"];
+        } elseif ($Option != null and $stm->rowCount() == 0) {
+            return $ref = [FALSE];
+        }
+
+        if ($stm->rowCount() == 1) {
+            return $ref = [TRUE];
+        } else {
+            return $ref = [FALSE];
+        }
     }
 }
 ?>

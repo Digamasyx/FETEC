@@ -28,11 +28,9 @@ user_body.addEventListener("click", (event) => {
 
 
     user_reg = document.getElementById("reg-a")
-    if (typeof user_reg !== null) {
-        user_reg.addEventListener("click", (event) => {
-                user_content.appendChild(Functions.createReg(user_content).full_form)
-        })
-    }
+    user_reg.addEventListener("click", (event) => {
+            user_content.appendChild(Functions.createReg(user_content).full_form)
+    })
 })
 
 catalog_body.addEventListener("click", (event) => {
@@ -63,16 +61,60 @@ window.onclick = function(event) {
     if (event.target === user_modal) {
         user_modal.style.display = "none"
     }
+
 }
+
+document.body.oninput = function (event) {
+    try {
+        var pass = {
+            pass_main: document.getElementById("input-pass"),
+            pass_conf: document.getElementById("input-pass_")
+        }
+    } catch (e) {
+        throw new Error(e)
+    } finally {
+
+        if (pass.pass_main !== null && pass.pass_conf !== null) {
+            pass.pass_main.oninput = function (event) {
+                if (pass.pass_main.value != pass.pass_conf.value) {
+                    pass.pass_main.style.borderColor = "red"
+                    pass.pass_conf.style.borderColor = "red"
+                } else if (pass.pass_main.value == pass.pass_conf.value) {
+                    pass.pass_main.style.borderColor = "#ced4da"
+                    pass.pass_conf.style.borderColor = "#ced4da"
+                    console.log("Same")
+                }
+            }
+
+            pass.pass_conf.oninput = function (event) {
+                if (pass.pass_main.value !== pass.pass_conf.value) {
+                    pass.pass_main.style.borderColor = "red"
+                    pass.pass_conf.style.borderColor = "red"
+                } else if (pass.pass_main.value == pass.pass_conf.value) {
+                    pass.pass_main.style.borderColor = "#ced4da"
+                    pass.pass_conf.style.borderColor = "#ced4da"
+                    console.log("Same")
+                }
+            }
+        }
+    }
+}
+
 
 user_content.addEventListener("click", (event) => {
     if (event.target.id === "input-ch") {
         const check = document.getElementById("input-ch")
-        const pass = document.getElementById("input-pass")
+        const pass = {
+            pass_main: document.getElementById("input-pass"),
+            pass_conf: document.getElementById("input-pass_")
+        }
+
         if(check.checked) {
-            pass.setAttribute("type", "text")
+            if (pass.pass_main === null) { return } else { pass.pass_main.setAttribute("type", "text") }
+            if (pass.pass_conf === null) { return } else { pass.pass_conf.setAttribute("type", "text") }
         } else {
-            pass.setAttribute("type", "password")
+            if (pass.pass_main === null) { return } else { pass.pass_main.setAttribute("type", "password") }
+            if (pass.pass_conf === null) { return } else { pass.pass_conf.setAttribute("type", "password") }
         }
 
     }

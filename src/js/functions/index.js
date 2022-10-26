@@ -34,7 +34,9 @@ export function getPos(element, [vertical = 0, horizontal = 0]) {
 export function createLogin(main_root) {
     main_root.innerHTML = ''
     var form = document.createElement("form");
-    form.innerHTML = '<div class="form-group"><label for="input-email">Endereço de E-mail</label><input class="form-control" id="input-email" type="email" placeholder="Insira seu E-mail"><small id="emailHelp" class="form-text text-muted">Seu e-mail não será compartilhado com niguem.</small></div><div class="form-group"><label for="input-pass">Senha</label><input class="form-control" id="input-pass" type="password" placeholder="Insira sua senha"></div><div class="form-group"><input class="form-check-input" id="input-ch" type="checkbox"><label class="form-check-label">Ver senha</label></div><div class="form-group"><button type="submit" class="btn btn-primary">Login</button><a href="#" id="reg-a">Não Possui Uma Conta? Registre-se.</a></div>'
+    form.setAttribute("method", "get")
+    form.setAttribute("action", "index.php")
+    form.innerHTML = '<div class="form-group"><label for="input-email">Endereço de E-mail</label><input class="form-control" id="input-email" type="email" placeholder="Insira seu E-mail" name="email"><small id="emailHelp" class="form-text text-muted">Seu e-mail não será compartilhado com niguem.</small></div><div class="form-group"><label for="input-pass">Senha</label><input class="form-control" id="input-pass" type="password" placeholder="Insira sua senha" name="senhaLog"></div><div class="form-group"><input class="form-check-input" id="input-ch" type="checkbox"><label class="form-check-label">Ver senha</label></div><div class="form-group"><button type="submit" class="btn btn-primary">Login</button><a href="#" id="reg-a">Não Possui Uma Conta? Registre-se.</a></div>'
 
     return {
         full_form: form
@@ -66,7 +68,7 @@ export function createReg(main_root) {
     <div class="form-group">
         <label for="input-pass">Senha</label>
         <input class="form-control" id="input-pass" type="password" placeholder="Insira sua senha" name="senha" required>
-        <label for="input-pass_">Senha</label>
+        <label for="input-pass_">Confirme sua senha</label>
         <input class="form-control" id="input-pass_" type="password" placeholder="Insira novamente sua senha" required>
     </div>
     <div class="form-group">
