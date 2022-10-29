@@ -4,7 +4,7 @@ namespace DatabaseConfig;
 interface DB {
     public function __construct($db);
     public function postData($post = [], $db): bool;
-    public function getData($get = [], $db, $Option = null, &$ref): array;
+    public function getData($get = [], $db, $Option = null, &$ref): bool;
 }
 
 class DB_tables implements DB {
@@ -36,22 +36,22 @@ class DB_tables implements DB {
         return TRUE;
     }
 
-    public function getData($get = [], $db, $Option = null, &$ref): array {
+    public function getData($get = [], $db, $Option = null, &$ref): bool {
 
         $sql = "SELECT * FROM usuarios WHERE nome = '$get[0]' AND senha = '$get[1]'" or die();
         $stm = $db->prepare($sql);
         $stm->execute();
 
         if ($Option != null and $stm->rowCount() == 1) {
-            return $ref = [TRUE, "Got User"];
+            return $ref = TRUE;
         } elseif ($Option != null and $stm->rowCount() == 0) {
-            return $ref = [FALSE];
+            return $ref = TRUE;
         }
 
         if ($stm->rowCount() == 1) {
-            return $ref = [TRUE];
+            return $ref = TRUE;
         } else {
-            return $ref = [FALSE];
+            return $ref = TRUE;
         }
     }
 }
