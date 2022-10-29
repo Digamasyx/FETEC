@@ -1,21 +1,6 @@
 <?php
 
-require_once("./src/php/imports.php");
-global $result;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if(!empty($_POST["usuario"]) and !empty($_POST["email"]) and !empty($_POST["senha"])) {
-    $data = array($_POST["usuario"], password_hash($_POST["senha"], "2y"), $_POST["email"]);
-    $db_c = new DatabaseConfig\DB_tables(db);
-    $result = $db_c->postData($data, db);
-  }
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-  if(!empty($_POST["email"]) and !empty($_POST["senha"])) {
-    $data_Log = array($_POST["email"], password_hash($_POST["senha"], "2y"));
-    $db_g = new DatabaseConfig\DB_tables(db);
-    $db_g->getData($data_Log, db, 1, $test);
-  }
-}
-}
+
 ?>
 
 
@@ -31,6 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/css/style.css">
     <link href="./src/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/fontawesome/css/all.css">
+    <script src="./src/fontawesome/js/all.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -59,6 +46,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 </div>
               </li>
             </ul>
+          </div>
+          <div class="form-popup" id="mainForm">
+            <form action="./src/php/pages/form.php" method="GET" class="form-container">
+              <h1>Login</h1>
+          
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Insira o Email" name="email" required>
+          
+              <label for="psw"><b>Senha</b></label>
+              <input type="password" placeholder="Insira a Senha" name="senha" required>
+          
+              <button type="submit" class="btnf">Login</button>
+              <button type="button" class="btnf cancel hvr-icon-rotate" id="closeF">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
+              </button>
+            </form>
           </div>
         </div>
       </nav>
@@ -206,7 +208,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         
     </footer>
 </body>
-    <script src="https://kit.fontawesome.com/996440bfa8.js" crossorigin="anonymous"></script>
     <script src="./src/bootstrap/bootstrap.bundle.js"></script>
     <script src="./src/js/index.js" type="module"></script>
 </html>
