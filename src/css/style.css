@@ -177,7 +177,16 @@ footer {
 
 /* USER MODAL */
 
-.form-popup {
+.form-container a {
+  text-decoration: none;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.form-container a:visited {
+  color: default;
+}
+
+.form-popup, .form-popup-sub {
   display: none;
   position: fixed;
   top: 50px;
@@ -187,14 +196,15 @@ footer {
   z-index: 9999;
 }
 
-.form-container {
+.form-container, .form-container-sub {
   max-width: 300px;
   padding: 10px;
   background-color: #fff;
 
 }
 
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type=text], .form-container input[type=password],
+.form-container-sub input[type=text], .form-container-sub input[type=password] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -202,12 +212,13 @@ footer {
   background: #f1f1f1;
 }
 
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type=text]:focus, .form-container input[type=password]:focus,
+.form-container-sub input[type=text]:focus, .form-container-sub input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
 
-.form-container .btnf {
+.form-container .btnf, .form-container-sub .btnf-sub {
   background-color: #04AA6D;
   color: white;
   padding: 16px 20px;
@@ -244,6 +255,7 @@ footer {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
+
 
 /*
   Bootstrap Changes

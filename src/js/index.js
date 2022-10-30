@@ -1,5 +1,10 @@
 const openform_a = document.getElementById("user-li")
 const mainForm = document.getElementById("mainForm")
+const subForm = document.getElementById("subForm")
+const fcHover = document.getElementById("fc-hover")
+const test = document.getElementById("navbarResponsive")
+
+const reg_main = document.getElementById("reg-main")
 // Catalog
 const catalog_body = document.getElementById("catalog_body")
 
@@ -44,5 +49,19 @@ openform_a.addEventListener("click", () => {
 mainForm.addEventListener("click", (event) => {
     if (event.target.id === "closeF") {
         mainForm.style.display = "none"
+    }
+})
+
+
+reg_main.addEventListener("click", (event) => {
+    if (event.target.id === reg_main.id) {
+        mainForm.style.display = "none"
+        subForm.style.display = "block"
+    }
+})
+
+subForm.addEventListener("click", (event) => {
+    if (event.target.id === "closeF-sub") {
+        subForm.style.display = "none"
     }
 })

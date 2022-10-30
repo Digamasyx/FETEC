@@ -1,5 +1,17 @@
 <?php
 
+define("__ROOT__", __DIR__);
+
+require_once(".\src\php\imports.php");
+
+$postRes;
+$getRes;
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $postRes = postMethod();
+  
+} else if ($_SERVER["REQUEST_METHOD"] === "GET") {
+  $getRes = getMethod();
+}
 
 ?>
 
@@ -48,7 +60,7 @@
             </ul>
           </div>
           <div class="form-popup" id="mainForm">
-            <form action="./src/php/pages/form.php" method="GET" class="form-container">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="GET" class="form-container">
               <h1>Login</h1>
           
               <label for="email"><b>Email</b></label>
@@ -57,8 +69,27 @@
               <label for="psw"><b>Senha</b></label>
               <input type="password" placeholder="Insira a Senha" name="senha" required>
           
+              <a target="blank" id="reg-main" class="reg-main">Não possui conta? Registre-se</a>
               <button type="submit" class="btnf">Login</button>
               <button type="button" class="btnf cancel hvr-icon-rotate" id="closeF">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
+              </button>
+            </form>
+          </div>
+          <div class="form-popup-sub" id="subForm">
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" class="form-container-sub">
+              <h1>Login</h1>
+
+              <label for="usuario"><b>Usuario</b></label>
+              <input type="text" name="usuario" placeholder="Insira seu nome" required="required">
+          
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Insira o Email" name="email" required>
+          
+              <label for="psw"><b>Senha</b></label>
+              <input type="password" placeholder="Insira a Senha" name="senha" required>
+          
+              <button type="submit" class="btnf-sub">Login</button>
+              <button type="button" class="btnf-sub cancel hvr-icon-rotate" id="closeF-sub">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
               </button>
             </form>
           </div>
