@@ -1,6 +1,7 @@
 <?php 
 namespace DatabaseCon;
 
+use Exception;
 
 class DatabaseCon {
     public int $errCode;
@@ -9,16 +10,15 @@ class DatabaseCon {
         try {
             define('db', new \PDO($dsn, $username, $password));
         } catch (\PDOException $e) {
-            $errCode = 1;
-            return $errCode;
+            $this->errCode = 1;
         } finally {
-            $errCode = 0;
-            return $errCode;
+            $this->errCode = 0;
         }
     }
 }
 
 class DB_tables {
+    public $row;
     public function __construct($db)
     {
         $sql = "CREATE TABLE IF NOT EXISTS usuarios (
@@ -36,7 +36,7 @@ class DB_tables {
      * $post[1] == Senha (Bycrypt)
      * $post[2] == Email
      */
-    public static function postData($post = [], $db): bool {
+    public function postData($post = [], $db): bool {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
         $test_exist = "SELECT * FROM usuarios WHERE nome ='$post[0]' and email = '$post[2]'";
@@ -55,26 +55,34 @@ class DB_tables {
     /** 
      * $get[0] == Nome de usuario
      * $get[1] == Senha já com bycrpt
-     * $Option == Se 1 precisa passar referencia
-     * $ref == referencia
      *
     */
-    public static function getData($get = [], $db, $Option = null, &$ref): bool {
+    public function getData($get, $db): bool {
 
-        $sql = "SELECT * FROM usuarios WHERE nome = '$get[0]' AND senha = '$get[1]'" or die();
+        $sql = "SELECT * FROM usuarios WHERE email = '$get[0]'" or die();
         $stm = $db->prepare($sql);
         $stm->execute();
-
-        if ($Option != null and $stm->rowCount() == 1) {
-            return $ref = TRUE;
-        } elseif ($Option != null and $stm->rowCount() == 0) {
-            return $ref = FALSE;
-        }
-
-        if ($stm->rowCount() == 1) {
-            return $ref = TRUE;
+        $this->row = $stm->fetch();
+        if(password_verify($get[1], $this->row["senha"])) {
+            return TRUE;
         } else {
-            return $ref = FALSE;
+            return FALSE;
+        }
+    }
+    public function defSession($result)
+    {
+
+        $id = $this->row["idUsuario"];
+        $username = $this->row["nome"];
+        $hash_pass = $this->row["senha"];
+
+        if ($result) {
+            session_start();
+
+            $_SESSION["logged"] = true;
+            $_SESSION["id"] = $id;
+            $_SESSION["user"] = $username;
+            header("location: ". $_SERVER["HTTP_REFERER"]);
         }
     }
 }

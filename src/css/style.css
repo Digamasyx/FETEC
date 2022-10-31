@@ -181,6 +181,7 @@ footer {
   text-decoration: none;
   padding: 5px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 .form-container a:visited {
   color: default;
@@ -254,6 +255,10 @@ footer {
 .hvr-icon-rotate:hover .hvr-icon, .hvr-icon-rotate:focus .hvr-icon, .hvr-icon-rotate:active .hvr-icon {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
+}
+
+.hiddenEl {
+  display: none;
 }
 
 
