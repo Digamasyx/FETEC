@@ -1,5 +1,12 @@
 <?php
+if (isset($_SESSION["logged"]) and $_SESSION["logged"] == true) {
+  unset($_SESSION["logged"]);
+}
+if (!isset($_SESSION)) {
+  $_SESSION["logged"] = false;
+}
 session_start();
+var_dump($_SESSION);
 
 require_once(dirname(__FILE__)."\src\php\imports.php");
 ?>
@@ -43,6 +50,13 @@ require_once(dirname(__FILE__)."\src\php\imports.php");
                 <div id="user-li">
                   <a href="#" class="nav-link" id="user">
                     <i class="fas fa-solid fa-user" id="user-icon"></i>
+                  </a>
+                </div>
+              </li>
+              <li class="nav-item" style=" display: <?php echo (isset($_SESSION["logged"]) and $_SESSION["logged"] == true) ? "flex" : "none"; ?>">
+                <div class="con-user">
+                  <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-form">
+                    <i class="fas fa-solid fa-plus"></i>
                   </a>
                 </div>
               </li>

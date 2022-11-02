@@ -175,6 +175,28 @@ footer {
   cursor: pointer;
 }
 
+.con-user {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  position: relative;
+}
+.con-user a {
+  display: inherit;
+}
+.con-user svg {
+  display: flex;
+  align-self: center;
+  width: 22px;
+  height: 20px;
+  
+}
+
+#navbarResponsive {
+  position: relative;
+}
+
 /* USER MODAL */
 
 .form-container a {

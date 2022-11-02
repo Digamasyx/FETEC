@@ -12,7 +12,7 @@ function postMethod() {
     $db_c = new DB_tables(db);
     $result = $db_c->postData($data, db);
 
-    return $result;
+    return [$db_c, $result];
   }
 }
 
