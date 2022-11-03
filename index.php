@@ -1,13 +1,6 @@
 <?php
-if (isset($_SESSION["logged"]) and $_SESSION["logged"] == true) {
-  unset($_SESSION["logged"]);
-}
-if (!isset($_SESSION)) {
-  $_SESSION["logged"] = false;
-}
-session_start();
+session_start(["name" => "Session"]);
 var_dump($_SESSION);
-
 require_once(dirname(__FILE__)."\src\php\imports.php");
 ?>
 

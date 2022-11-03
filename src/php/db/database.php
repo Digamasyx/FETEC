@@ -1,11 +1,12 @@
 <?php 
 namespace DatabaseCon;
 
-use Exception;
+use PDO;
+
 
 class DatabaseCon {
     public int $errCode;
-    public function __construct($dsn = "", $username = "", $password = "")
+    public function __construct(string $dsn, string $username, string $password)
     {
         try {
             define('db', new \PDO($dsn, $username, $password));
@@ -18,7 +19,7 @@ class DatabaseCon {
 }
 
 class DB_tables {
-    public $row;
+    public array $row;
     public function __construct($db)
     {
         $sql = "CREATE TABLE IF NOT EXISTS usuarios (
@@ -36,7 +37,7 @@ class DB_tables {
      * $post[1] == Senha (Bycrypt)
      * $post[2] == Email
      */
-    public function postData($post = [], $db): bool {
+    public function postData(array $post, $db): bool {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
         $test_exist = "SELECT * FROM usuarios WHERE nome ='$post[0]' and email = '$post[2]'";
@@ -57,33 +58,86 @@ class DB_tables {
      * $get[1] == Senha já com bycrpt
      *
     */
-    public function getData($get, $db): bool {
+    public function getData(array $get, $db): bool {
 
         $sql = "SELECT * FROM usuarios WHERE email = '$get[0]'" or die();
         $stm = $db->prepare($sql);
         $stm->execute();
-        $this->row = $stm->fetch();
+        $this->row = $stm->fetch(PDO::FETCH_ASSOC);
         if(password_verify($get[1], $this->row["senha"])) {
             return TRUE;
         } else {
             return FALSE;
         }
     }
-    public function defSession($result)
+}
+
+class Session {
+
+    const SESSION_STARTED = true;
+    const SESSTION_NOT_STARTED = false;
+
+    private $sessionState = self::SESSTION_NOT_STARTED;
+
+    private static $instance;
+
+    private function __construct()
     {
+        
+    }
 
-        $id = $this->row["idUsuario"];
-        $username = $this->row["nome"];
-        $hash_pass = $this->row["senha"];
 
-        if ($result) {
-            session_start();
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
+            self::$instance = new self;
+        }  
 
-            $_SESSION["logged"] = true;
-            $_SESSION["id"] = $id;
-            $_SESSION["user"] = $username;
-            header("location: ". $_SERVER["HTTP_REFERER"]);
+        self::$instance->startSession();
+
+        return self::$instance;
+    }
+
+    public function startSession()
+    {
+        if ($this->sessionState == self::SESSTION_NOT_STARTED) {
+            $this->sessionState = session_start(["cookie_lifetime" => 86400, "name" => "Session"]);
         }
+
+        return $this->sessionState;
+    }
+
+
+    public function __set($data, $value)
+    {
+        $_SESSION[$data] = $value;
+    }
+
+    public function __get($name)
+    {
+        if (isset($_SESSION[$name])) return $_SESSION[$name];
+    }
+
+    public function __isset($name)
+    {
+        return isset($_SESSION[$name]);
+    }
+
+    public function __unset($name)
+    {
+        unset($_SESSION[$name]);
+    }
+
+    public function __destroy()
+    {
+        if ($this->sessionState == self::SESSION_STARTED) {
+            $this->sessionState = !session_destroy();
+            unset($_SESSION);
+
+            return !$this->sessionState;
+        }
+
+        return false;
     }
 }
 ?>

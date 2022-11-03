@@ -2,7 +2,6 @@
 define("__broot__", dirname(__FILE__, 4));
 define("__lroot__", dirname(__FILE__, 2));
 use DatabaseCon\DB_tables;
-use DatabaseCon\DefSession;
 
 require_once(__lroot__."\imports.php");
 
