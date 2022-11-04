@@ -1,6 +1,5 @@
 <?php
 session_start(["name" => "Session"]);
-var_dump($_SESSION);
 require_once(dirname(__FILE__)."\src\php\imports.php");
 ?>
 
@@ -46,7 +45,7 @@ require_once(dirname(__FILE__)."\src\php\imports.php");
                   </a>
                 </div>
               </li>
-              <li class="nav-item" style=" display: <?php echo (isset($_SESSION["logged"]) and $_SESSION["logged"] == true) ? "flex" : "none"; ?>">
+              <li class="nav-item" style=" display: <?php echo (isset($_SESSION["id"]) and gettype($_SESSION["id"]) === "integer") ? "flex" : "none"; ?>">
                 <div class="con-user">
                   <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-form">
                     <i class="fas fa-solid fa-plus"></i>
@@ -56,15 +55,15 @@ require_once(dirname(__FILE__)."\src\php\imports.php");
             </ul>
           </div>
           <div class="form-popup" id="mainForm">
-            <form action="src/php/pages/formlog.php" method="POST" class="form-container">
+            <form action="src/php/pages/formlog.php" method="POST" class="form-container" id="main-form">
               <h1>Login</h1>
 
               <label for="email"><b>Email</b></label>
-              <input type="text" placeholder="Insira o Email" name="email_" required>
+              <input type="text" placeholder="Insira o Email" name="email_" id="mailInpt" required>
           
               <label for="psw"><b>Senha</b></label>
-              <input type="password" placeholder="Insira a Senha" name="senha" required>
-          
+              <input type="password" placeholder="Insira a Senha" name="senha" id="passInpt" required>
+              <p id="warning-text" style="display: none;">CapsLock Ativado!</p>
               <a id="reg-main" class="reg-main">Não possui conta? Registre-se</a>
               <button type="submit" class="btnf">Login</button>
               <button type="button" class="btnf cancel hvr-icon-rotate" id="closeF">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
@@ -76,14 +75,15 @@ require_once(dirname(__FILE__)."\src\php\imports.php");
               <h1>Registro</h1>
 
               <label for="usuario"><b>Usuario</b></label>
-              <input type="text" name="usuario" placeholder="Insira seu nome" required="required">
+              <input type="text" name="usuario" placeholder="Insira seu nome" id="userInpt" required="required">
           
               <label for="email"><b>Email</b></label>
-              <input type="text" placeholder="Insira o Email" name="email" required>
+              <input type="text" placeholder="Insira o Email" name="email" id="subMailInpt" required>
           
               <label for="psw"><b>Senha</b></label>
-              <input type="password" placeholder="Insira a Senha" name="senha" required>
+              <input type="password" placeholder="Insira a Senha" name="senha" id="subPassInpt" required>
           
+              <p id="warning-text-" style="display: none;">CapsLock Ativado!</p>
               <button type="submit" class="btnf-sub">Registro</button>
               <button type="button" class="btnf-sub cancel hvr-icon-rotate" id="closeF-sub">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
               </button>

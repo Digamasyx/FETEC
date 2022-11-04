@@ -1,8 +1,19 @@
 const openform_a = document.getElementById("user-li")
 const mainForm = document.getElementById("mainForm")
 const subForm = document.getElementById("subForm")
-const fcHover = document.getElementById("fc-hover")
-const test = document.getElementById("navbarResponsive")
+
+const inputs_ = {
+    text: document.getElementById("warning-text"),
+    subText: document.getElementById("warning-text-"),
+    form : [
+        mainForm.addEventListener("keyup", (event) => {
+        inputs_.text.style.display = (event.getModifierState("CapsLock")) ? "block" : "none"
+        }),
+        subForm.addEventListener("keyup", (event) => {
+            inputs_.subText.style.display = (event.getModifierState("CapsLock")) ? "block" : "none"
+        })
+    ]
+}
 
 const reg_main = document.getElementById("reg-main")
 // Catalog
@@ -37,19 +48,11 @@ window.onclick = function(event) {
     if (event.target === modal) {
         modal.style.display = "none"
     }
-    if (event.target.id !== "mainForm" && event.target.style.display === "block") {
-        mainForm.style.display = "none"
-    }
 
 }
 
 openform_a.addEventListener("click", () => {
     mainForm.style.display = "block"
-})
-mainForm.addEventListener("click", (event) => {
-    if (event.target.id === "closeF") {
-        mainForm.style.display = "none"
-    }
 })
 
 
@@ -60,8 +63,14 @@ reg_main.addEventListener("click", (event) => {
     }
 })
 
+mainForm.addEventListener("click", (event) => {
+    if (event.target.id === "closeF") {
+        mainForm.style.display = "none"
+    }
+})
 subForm.addEventListener("click", (event) => {
     if (event.target.id === "closeF-sub") {
         subForm.style.display = "none"
     }
 })
+

@@ -43,7 +43,7 @@ class DB_tables {
         $test_exist = "SELECT * FROM usuarios WHERE nome ='$post[0]' and email = '$post[2]'";
         $exec = $db->prepare($test_exist);
         $exec->execute();
-        if ($exec->fetchColumn() == 1) {
+        if ($exec->fetchColumn() >= 1) {
             return FALSE;
         }
         $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]')";
