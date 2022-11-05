@@ -1,6 +1,18 @@
 <?php
 session_start(["name" => "Session"]);
 require_once(dirname(__FILE__)."\src\php\imports.php");
+$__isSessionSet = (isset($_SESSION["id"]) and gettype($_SESSION["id"]) === "integer") ? true : false;
+
+
+$__exitSession = (isset($_POST["sair"]) and $_POST["sair"] === "true");
+
+if ($__exitSession) {
+  $_SESSION = array();
+  $__isSessionSet = false;
+}
+
+
+
 ?>
 
 
@@ -40,12 +52,12 @@ require_once(dirname(__FILE__)."\src\php\imports.php");
               </li>
               <li class="nav-item">
                 <div id="user-li">
-                  <a href="#" class="nav-link" id="user">
+                  <a href="#" class="nav-link user" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>">
                     <i class="fas fa-solid fa-user" id="user-icon"></i>
                   </a>
                 </div>
               </li>
-              <li class="nav-item" style=" display: <?php echo (isset($_SESSION["id"]) and gettype($_SESSION["id"]) === "integer") ? "flex" : "none"; ?>">
+              <li class="nav-item" style=" display: <?php echo $__isSessionSet  ? "flex" : "none"; ?>">
                 <div class="con-user">
                   <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-form">
                     <i class="fas fa-solid fa-plus"></i>
@@ -88,6 +100,27 @@ require_once(dirname(__FILE__)."\src\php\imports.php");
               <button type="button" class="btnf-sub cancel hvr-icon-rotate" id="closeF-sub">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
               </button>
             </form>
+          </div>
+          <div class="user-container" id="userConfig">
+            <div class="user-popup">
+                <h5>Olá! <?php echo $__isSessionSet ? $_SESSION["user"] : 'default' ?></h5>
+                <form action="" method="post">
+                  <div class="configurarConta">
+                    <button type="submit">
+                      <p>Configurações</p>
+                      <i class="fas fa-solid fa-gear"></i>
+                    </button>
+                  </div>
+                </form>
+                <form action="index.php" method="post">
+                  <div class="sairConta" id="sair-conta">
+                    <button type="submit" name="sair" value="true">
+                      <p>Encerrar Sessão</p>
+                      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
+                  </div>
+                </form>
+            </div>
           </div>
         </div>
       </nav>

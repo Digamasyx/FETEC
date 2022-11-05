@@ -1,7 +1,21 @@
-const openform_a = document.getElementById("user-li")
-const mainForm = document.getElementById("mainForm")
-const subForm = document.getElementById("subForm")
+// Imports
+import { getPos } from "./functions/getPos.js"
 
+
+
+// User Open Form Div
+const openform_a = document.getElementById("user-li")
+// Main Form || Login Form
+const mainForm = document.getElementById("mainForm")
+// Sub Form || Register Form
+const subForm = document.getElementById("subForm")
+// (If Logged Only) It will substitute the main form with a config popup
+const userConfig = document.getElementById("userConfig")
+
+/* This is a read-only object, 
+ * which contains listeners for the forms and returns void or null, 
+ * and its frozen by Object.freeze()
+ */
 const inputs_ = {
     text: document.getElementById("warning-text"),
     subText: document.getElementById("warning-text-"),
@@ -14,11 +28,22 @@ const inputs_ = {
         })
     ]
 }
+Object.freeze(inputs_)
 
+
+/* This element contains the following message,
+ * pt-br (Não possui conta? Registre-se),
+ * en-us (Don't have an account? register)
+ */
 const reg_main = document.getElementById("reg-main")
-// Catalog
+/*
+ * This element its the secondary body in it contains the cards
+ */
 const catalog_body = document.getElementById("catalog_body")
 
+/*
+ * This parts creates elements for futher use 
+ */
 const modal = document.createElement("div")
 const modal_content = document.createElement("p")
 
@@ -52,7 +77,14 @@ window.onclick = function(event) {
 }
 
 openform_a.addEventListener("click", () => {
-    mainForm.style.display = "block"
+    for (const child of openform_a.children) {
+        if (child.id === "user") {
+            mainForm.style.display = "block"
+        } else if (child.id === "user_") {
+            userConfig.style.left = getPos(openform_a).offSet.left + "px"
+            userConfig.style.display = "block"
+        }
+    }
 })
 
 
@@ -73,4 +105,3 @@ subForm.addEventListener("click", (event) => {
         subForm.style.display = "none"
     }
 })
-

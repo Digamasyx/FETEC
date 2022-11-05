@@ -19,7 +19,7 @@ class DatabaseCon {
 }
 
 class DB_tables {
-    public array $row;
+    public $row;
     public function __construct($db)
     {
         $sql = "CREATE TABLE IF NOT EXISTS usuarios (
