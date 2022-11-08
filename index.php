@@ -11,8 +11,6 @@ if ($__exitSession) {
   $__isSessionSet = false;
 }
 
-
-
 ?>
 
 
@@ -33,6 +31,14 @@ if ($__exitSession) {
     <title>Document</title>
 </head>
 <body>
+  <div id="modal">
+    <div id="modal_content">
+      <form action="./src/php/pages/formpost.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload" name="submit">
+      </form>
+    </div>
+  </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
           <a class="navbar-brand" href="#" id="nav_text">Lorem</a>
@@ -59,7 +65,7 @@ if ($__exitSession) {
               </li>
               <li class="nav-item" style=" display: <?php echo $__isSessionSet  ? "flex" : "none"; ?>">
                 <div class="con-user">
-                  <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-form">
+                  <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-post">
                     <i class="fas fa-solid fa-plus"></i>
                   </a>
                 </div>

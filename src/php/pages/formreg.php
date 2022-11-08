@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("location: ". $_SERVER["HTTP_REFERER"]);
     } else if (!$result) {
         $cryptExists = password_hash("EXISTS", PASSWORD_BCRYPT);
-        $__cookie = setcookie("userExists", $cryptExists, time()+60);
-        if($__cookie) {
+        $set = setcookie("__cookie", $cryptExists, time()+60, "/");
+        if($set) {
             header("location: ". $_SERVER["HTTP_REFERER"]);
         }
     }

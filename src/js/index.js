@@ -2,7 +2,9 @@
 import { getPos } from "./functions/getPos.js"
 
 
-
+const modal = document.getElementById("modal")
+const modal_content = document.getElementById("modal_content")
+const create_post = document.getElementById("create-post")
 // User Open Form Div
 const openform_a = document.getElementById("user-li")
 // Main Form || Login Form
@@ -41,12 +43,6 @@ const reg_main = document.getElementById("reg-main")
  */
 const catalog_body = document.getElementById("catalog_body")
 
-/*
- * This parts creates elements for futher use 
- */
-const modal = document.createElement("div")
-const modal_content = document.createElement("p")
-
 
 catalog_body.addEventListener("click", (event) => {
 
@@ -58,9 +54,6 @@ catalog_body.addEventListener("click", (event) => {
     
 
     modal_content.innerText = "Lorem"
-
-    modal.setAttribute("id", "modal")
-    modal_content.setAttribute("id", "modal_content")
     
     modal.appendChild(modal_content)
     document.body.appendChild(modal)
@@ -104,4 +97,13 @@ subForm.addEventListener("click", (event) => {
     if (event.target.id === "closeF-sub") {
         subForm.style.display = "none"
     }
+})
+
+create_post.addEventListener("click", (event) => {
+    if (!event.target.id === create_post.id) { return; }
+    if (modal.style.display === "block" && event.target.id === modal.id) { return modal.style.display = "none"; }
+    
+    modal.style.display = "block"
+
+    
 })

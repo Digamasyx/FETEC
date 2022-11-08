@@ -160,19 +160,7 @@ footer {
   border: 1px solid #888;
   width: 80%;
 }
-#close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
 
-#close:hover,
-#close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 .con-user {
   display: flex;
@@ -351,6 +339,7 @@ footer div.row {
   justify-content: flex-end;
   align-items: center;
 } */
+
 .sairConta:hover, .sairConta button:hover, .configurarConta:hover, .configurarConta button:hover {
   background-color: #e1e1e1;
 }

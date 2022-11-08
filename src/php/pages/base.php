@@ -24,4 +24,22 @@ function getMethod() {
   }
 }
 
+function postFile(array $options) {
+
+  if(isset($_POST["submit"]) and !empty($_FILES["file"]["name"])) {
+
+    $allowedTypes = array('jpg', 'png','jpeg');
+
+    if(in_array($options[3], $allowedTypes)) {
+
+      if(move_uploaded_file($_FILES["file"]["tmp_name"], $options[2])) {
+
+        $db_f = new DB_tables(db);
+
+        
+      }
+    }
+  }
+}
+
 ?>
