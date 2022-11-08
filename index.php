@@ -34,6 +34,16 @@ if ($__exitSession) {
   <div id="modal">
     <div id="modal_content">
       <form action="./src/php/pages/formpost.php" method="post" enctype="multipart/form-data">
+        <input type="text" name="nomePL">
+        <select name="regiao">
+          <option value="0"></option>
+          <option value="1">Norte</option>
+          <option value="2">Nordeste</option>
+          <option value="3">Sul</option>
+          <option value="4">Sudeste</option>
+          <option value="5">Centro-Oeste</option>
+        </select>
+      
         <input type="file" name="file">
         <input type="submit" value="Upload" name="submit">
       </form>
