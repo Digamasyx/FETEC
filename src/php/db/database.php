@@ -32,6 +32,8 @@ class DB_tables {
         nomePl varchar(255) NOT NULL,
         dataCriacao DATETIME NOT NULL,
         regiao INT NOT NULL,
+        descricao varchar(255) NOT NULL,
+        shortDesc varchar(255) NOT NULL,
         nomeImagem varchar(255) NOT NULL,
         caminho varchar(255) NOT NULL,
         idPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY)";
@@ -94,6 +96,19 @@ class DB_tables {
         } else {
             return FALSE;
         }
+    }
+
+    public static function getFiles($db): array
+    {
+        $sql = "SELECT * FROM posts";
+        $stm = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stm->execute();
+        
+        $data = $stm->fetchAll();
+
+
+
+        return $data;
     }
 }
 

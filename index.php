@@ -1,4 +1,5 @@
 <?php
+use DatabaseCon\DB_tables;
 session_start(["name" => "Session"]);
 require_once(dirname(__FILE__)."\src\php\imports.php");
 $__isSessionSet = (isset($_SESSION["id"]) and gettype($_SESSION["id"]) === "integer") ? true : false;
@@ -10,6 +11,8 @@ if ($__exitSession) {
   $_SESSION = array();
   $__isSessionSet = false;
 }
+
+print_r(DB_tables::getFiles(db));
 
 ?>
 
@@ -34,17 +37,25 @@ if ($__exitSession) {
   <div id="modal">
     <div id="modal_content">
       <form action="./src/php/pages/formpost.php" method="post" enctype="multipart/form-data">
-        <input type="text" name="nomePL">
-        <select name="regiao">
-          <option value="0"></option>
-          <option value="1">Norte</option>
-          <option value="2">Nordeste</option>
-          <option value="3">Sul</option>
-          <option value="4">Sudeste</option>
-          <option value="5">Centro-Oeste</option>
-        </select>
-      
-        <input type="file" name="file">
+        <div class="form-group">
+          <label for="formControlInpt">Nome Da Planta</label>
+          <input type="text" name="nomePL" id="formControlInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)">
+        </div>
+        <div class="form-group">
+          <label for="formControlSelect">Região</label>
+          <select name="regiao" id="formControlSelect" class="form-control">
+            <option value="0"></option>
+            <option value="1">Norte</option>
+            <option value="2">Nordeste</option>
+            <option value="3">Sul</option>
+            <option value="4">Sudeste</option>
+            <option value="5">Centro-Oeste</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formControlFile">Imagem</label>
+          <input type="file" class="form-control-file" name="file" id="formControlFile">
+        </div>
         <input type="submit" value="Upload" name="submit">
       </form>
     </div>
