@@ -10,7 +10,27 @@ define("Regioes", array(
        "NORDESTE" => 2,
        "SUL" => 3,
        "SUDESTE" => 4,
-       "CENTRO_OESTE" => 5));
+       "CENTRO_OESTE" => 5)
+);
 
+function generateNumber(array $element): array {
+       $min = 0;
+       $max = count($element)-1;
+       $count = count($element);
+
+
+       $nonrepeatarray = array();
+       for($i = 0; $i < $count; $i++) 
+       {
+          $rand = rand($min,$max);
+
+              while(in_array($rand,$nonrepeatarray)) {
+                     $rand = rand($min,$max);
+              }
+
+              $nonrepeatarray[$i] = $rand;
+       }
+       return $nonrepeatarray;
+}
 
 ?>

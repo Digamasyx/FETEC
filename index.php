@@ -12,8 +12,11 @@ if ($__exitSession) {
   $__isSessionSet = false;
 }
 
-print_r(DB_tables::getFiles(db));
+$elements = DB_tables::getFiles(db);
+$qtdElement = count(DB_tables::getFiles(db));
+$i = 0;
 
+var_dump(generateNumber($elements))
 ?>
 
 
@@ -191,63 +194,18 @@ print_r(DB_tables::getFiles(db));
       </header>
       
       <div id="catalog_body">
-        <div id="card_1" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem</b></h4>
-            <p id="short_desc">Lorem</p>
+        <?php while($i !== $qtdElement):  ?>
+            <div id="card_<?=$i?>" class="card">
+              <img src="./src/php/pages/<?=$elements[$i]['caminho']?>" alt="Icon">
+              <div class="container_">
+                <h4><b><?=$elements[$i]['nomePl']?></b></h4>
+                <p id="short_desc"><?=$elements[$i]['shortDesc']?></p>
+              </div>
+            </img>
           </div>
-        </img>
+          <?php $i++; ?>
+        <?php endwhile; ?>
       </div>
-        <div id="card_2" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem1</b></h4>
-            <p id="short_desc">Lorem</p>
-          </div>
-        </img>
-      </div>
-        <div id="card_3" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem2</b></h4>
-            <p id="short_desc">Lorem</p>
-          </div>
-        </img>
-      </div>
-        <div id="card_4" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem3</b></h4>
-            <p id="short_desc">Lorem</p>
-          </div>
-        </img>
-      </div>
-        <div id="card_5" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem4</b></h4>
-            <p id="short_desc">Lorem</p>
-          </div>
-        </img>
-      </div>
-        <div id="card_6" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem5</b></h4>
-            <p id="short_desc">Lorem</p>
-          </div>
-        </img>
-      </div>
-        <div id="card_7" class="card">
-          <img src="./src/img/test-user.png" alt="Icon">
-          <div class="container_">
-            <h4><b>Lorem6</b></h4>
-            <p id="short_desc">Lorem</p>
-          </div>
-        </img>
-      </div>
-  </div>
 
     <footer class="w-100 py-4 flex-shrink-0">
       <div id="shadow"><div id="grad_anim"></div></div>
@@ -256,7 +214,7 @@ print_r(DB_tables::getFiles(db));
           <div class="col-lg-4 col-md-6">
             <h5 class="h1 text-white">FB.</h5>
             <p class="small text-muted">Lorem Ipsum</p>
-            <p class="small text-muted mb-0">&copy; MIT Licensed <a href="https://github.com/Opylx" class="text-primary"><br>Created BY Emanuel Nogueira (Aka: DigamaSyx)</a></p>
+            <p class="small text-muted mb-0">&copy; LGPL-3.0 Licensed <a href="https://github.com/Opylx" class="text-primary"><br>Created BY Emanuel Nogueira (Aka: DigamaSyx)</a></p>
           </div>
           <div class="col-lg-2 col-md-6">
             <h5 class="text-white mb-3">Quick Links</h5>
