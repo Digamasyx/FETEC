@@ -1,10 +1,7 @@
 // Imports
 import { getPos } from "./functions/getPos.js"
+import { default as getData } from './functions/getData.js'
 
-
-const modal = document.getElementById("modal")
-const modal_content = document.getElementById("modal_content")
-const create_post = document.getElementById("create-post")
 // User Open Form Div
 const openform_a = document.getElementById("user-li")
 // Main Form || Login Form
@@ -38,36 +35,6 @@ Object.freeze(inputs_)
  * en-us (Don't have an account? register)
  */
 const reg_main = document.getElementById("reg-main")
-/*
- * This element its the secondary body in it contains the cards
- */
-const catalog_body = document.getElementById("catalog_body")
-
-
-catalog_body.addEventListener("click", (event) => {
-
-    if(event.target.id.toLowerCase().includes("catalog_body")) {
-        return
-    }
-    
-    const clicked_element = document.getElementById(event.target.id)
-    
-
-    modal_content.innerText = "Lorem"
-    
-    modal.appendChild(modal_content)
-    document.body.appendChild(modal)
-    
-    modal.style.display = "block"
-
-})
-
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none"
-    }
-
-}
 
 openform_a.addEventListener("click", () => {
     for (const child of openform_a.children) {
@@ -99,11 +66,8 @@ subForm.addEventListener("click", (event) => {
     }
 })
 
-create_post.addEventListener("click", (event) => {
-    if (!event.target.id === create_post.id) { return; }
-    if (modal.style.display === "block" && event.target.id === modal.id) { return modal.style.display = "none"; }
-    
-    modal.style.display = "block"
+const subModal = document.getElementById('subModal')
 
-    
+subModal.addEventListener('show.bs.modal', (event) => {
+    console.log(event.relatedTarget)
 })

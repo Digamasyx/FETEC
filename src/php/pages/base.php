@@ -25,14 +25,25 @@ function getMethod() {
 }
 
 function postFile(array $options, array $data): ?array {
+  $fileExists = (bool) [];
 
   if(isset($_POST["submit"]) and !empty($_FILES["file"]["name"])) {
 
-    if (!file_exists("files/")) {
-      mkdir('files/', 0777, true);
-      if (!file_exists("files/".$_SESSION['user']."/")) {
-        mkdir('files/'.$_SESSION["user"]."/", 0777, true);
+    try{
+      if (file_exists("files/") === false) {
+        mkdir('files/', 0777, true);
+        $fileExists[0] = true;
+      } else if (file_exists("files/")) {
+        $fileExists[0] = true;
+      } else {
+        $fileExists[0] = false;
       }
+      if (!file_exists("files/".$_SESSION['user']."/") and $fileExists[0] === true) {
+        mkdir('files/'.$_SESSION['user']."/", 0777);
+        $fileExists[1] = true;
+      }
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
 
     $allowedTypes = array('jpg', 'png','jpeg');
@@ -40,11 +51,9 @@ function postFile(array $options, array $data): ?array {
     if(in_array($options[3], $allowedTypes)) {
 
       if(move_uploaded_file($_FILES["file"]["tmp_name"], $options[2])) {
-
-        var_dump($data, $options);
         $db_f = new DB_tables(db);
 
-        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2]], db);
+        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2]], db);
 
         return [$db_f, $result];
       }

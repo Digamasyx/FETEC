@@ -14,9 +14,9 @@ define("Regioes", array(
 );
 
 function generateNumber(array $element): array {
-       $min = 0;
-       $max = count($element)-1;
-       $count = count($element);
+       $min = (int) 0;
+       $max = (int) count($element)-1;
+       $count = (int) (count($element) == 0) ? 0 : count($element);
 
 
        $nonrepeatarray = array();
@@ -32,5 +32,29 @@ function generateNumber(array $element): array {
        }
        return $nonrepeatarray;
 }
+
+function ExceptionHandlerFunction($errNo, $errStr, $errFile, $errLine) {
+
+       if(!error_reporting() & $errNo) { return false; }
+
+       $errStr = htmlspecialchars($errStr);
+
+
+       switch($errNo) {
+
+              case E_USER_ERROR:
+                     echo "<b> E_USER_ERROR </b> [$errNo] $errStr <br />\n";
+                     echo " Fatal Error in $errFile on line $errLine";
+                     echo ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n";
+                     exit(1);
+              case E_USER_WARNING:
+                     echo "<b> E_USER_WARNING </b> [$errNo] $errStr <br />\n";
+                     break;
+       }
+
+       return true;
+}
+
+set_error_handler('ExceptionHandlerFunction')
 
 ?>

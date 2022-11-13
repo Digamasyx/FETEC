@@ -88,7 +88,7 @@ class DB_tables {
     public function postFiles(array $data_, $db): bool
     {
         $data = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]')";
+        $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]')";
 
         $stm = $db->prepare($sql);
         if($stm->execute()) {

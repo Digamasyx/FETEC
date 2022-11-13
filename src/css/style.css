@@ -19,7 +19,6 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-image: url("../img/photo-1510070009289-b5bc34383727.jfif");
     cursor: pointer;
 }
 .carousel-caption {
@@ -28,49 +27,6 @@ body {
 #carousel_ {
   box-shadow: 0 8px 10px var(--box-shadow-light);
 }
-  
-
-
-
-/* CARD */
-.card {
-
-    box-shadow: 0 4px 8px 0 var(--box-shadow);
-    transition: 400ms;
-    padding: var(--df-padding);
-    margin: var(--df-margin);
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 var(--box-shadow);
-}
-
-.card > img {
-  width: auto;
-  height: auto;
-  
-  max-width: 20vh;
-  max-height: 20vh;
-  
-}
-
-.card > img:hover {
-  cursor: pointer;
-}
-
-
-
-
-/* CARD CONTAINER */
-.container_ {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2px 16px;
-}
-
-
-
 
 /* CATALOG */
 #catalog_body {
@@ -141,7 +97,7 @@ footer {
 
 
 
-#modal {
+#modal_ {
   display: none;
   position: fixed;
   z-index: 9999;
@@ -153,12 +109,13 @@ footer {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
-#modal_content {
+#modal_content_ {
   background-color: #fff;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  max-width: 80%;
+  max-height: 80%;
 }
 
 
@@ -175,8 +132,8 @@ footer {
 .con-user svg {
   display: flex;
   align-self: center;
-  width: 22px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
   
 }
 
@@ -284,21 +241,9 @@ footer {
 footer div.row {
   margin-right: 0 !important;
 }
-#user-li {
-  margin-left: 5px;
-}
-.user {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  border: #000 solid .5px;
-  border-radius: 50%;
-}
 .user > svg {
-  width: 22px;
-  height: 20px;
+  width: 1em;
+  height: 1em;
 }
 
 .user-container {

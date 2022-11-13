@@ -15,8 +15,9 @@ if ($__exitSession) {
 $elements = DB_tables::getFiles(db);
 $qtdElement = count(DB_tables::getFiles(db));
 $i = 0;
+$rngElements = generateNumber($elements);
 
-var_dump(generateNumber($elements))
+var_dump($rngElements)
 ?>
 
 
@@ -29,40 +30,68 @@ var_dump(generateNumber($elements))
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./src/css/style.css">
     <link href="./src/bootstrap/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="./src/fontawesome/css/all.css">
-    <script src="./src/fontawesome/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
 <body>
-  <div id="modal">
-    <div id="modal_content">
-      <form action="./src/php/pages/formpost.php" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="formControlInpt">Nome Da Planta</label>
-          <input type="text" name="nomePL" id="formControlInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)">
-        </div>
-        <div class="form-group">
-          <label for="formControlSelect">Região</label>
-          <select name="regiao" id="formControlSelect" class="form-control">
-            <option value="0"></option>
-            <option value="1">Norte</option>
-            <option value="2">Nordeste</option>
-            <option value="3">Sul</option>
-            <option value="4">Sudeste</option>
-            <option value="5">Centro-Oeste</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="formControlFile">Imagem</label>
-          <input type="file" class="form-control-file" name="file" id="formControlFile">
-        </div>
-        <input type="submit" value="Upload" name="submit">
-      </form>
+<div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="subModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
+</div>
+  <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="mainModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form action="./src/php/pages/formpost.php" method="post" enctype="multipart/form-data">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="mainModalLabel">Criar Post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="formControlInpt">Nome Da Planta</label>
+              <input type="text" name="nomePL" id="formControlInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)">
+              <label for="shortDescInpt">Descrição Curta</label>
+              <input type="text" name="shortDesc" id="shortDescInpt" placeholder="Descrição Curta" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="formControlSelect">Região</label>
+              <select name="regiao" id="formControlSelect" class="form-select">
+                <option selected>Região</option>
+                <option value="1">Norte</option>
+                <option value="2">Nordeste</option>
+                <option value="3">Sul</option>
+                <option value="4">Sudeste</option>
+                <option value="5">Centro-Oeste</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="formControlFile">Imagem</label>
+              <input type="file" class="form-control" name="file" id="formControlFile" aria-label="Upload">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <input type="submit" class="btn btn-primary" value="Enviar" name="submit"></input>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
           <a class="navbar-brand" href="#" id="nav_text">Lorem</a>
@@ -82,15 +111,15 @@ var_dump(generateNumber($elements))
               </li>
               <li class="nav-item">
                 <div id="user-li">
-                  <a href="#" class="nav-link user" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>">
-                    <i class="fas fa-solid fa-user" id="user-icon"></i>
+                  <a href="#" class="navbar-brand user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>">
+                    <i class="bi bi-person-circle"></i>
                   </a>
                 </div>
               </li>
               <li class="nav-item" style=" display: <?php echo $__isSessionSet  ? "flex" : "none"; ?>">
                 <div class="con-user">
-                  <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-post">
-                    <i class="fas fa-solid fa-plus"></i>
+                  <a href="#" aria-describedby="Criar Post"  rel="noopener noreferrer" class="nav-link" id="create-post" data-bs-toggle="modal" data-bs-target="#mainModal">
+                    <i class="bi bi-plus-circle"></i>
                   </a>
                 </div>
               </li>
@@ -163,22 +192,22 @@ var_dump(generateNumber($elements))
             <button type="button" data-bs-target="#carousel_" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item active" style=" background-image: url('./src/php/pages/<?=$elements[$rngElements[0]]["caminho"]?>')">
               <div class="carousel-caption">
-                <h5>Lorem</h5>
-                <p id="short_desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio ullam explicabo quae illo reiciendis, in amet labore magni quaerat, incidunt itaque, dolore sed? Veniam corporis laudantium provident, similique ipsum voluptas.</p>
+                <h5><?=$elements[$rngElements[0]]["nomePl"]?></h5>
+                <p id="short_desc"><?=$elements[$rngElements[0]]["shortDesc"]?></p>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" style=" background-image: url('./src/php/pages/<?=$elements[$rngElements[1]]["caminho"]?>')">
               <div class="carousel-caption">
-                <h5>Lorem</h5>
-                <p id="short_desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius libero cupiditate cumque quasi et sunt repudiandae a nobis corporis explicabo tempore placeat magnam sapiente, quibusdam mollitia molestiae ipsa distinctio nesciunt.</p>
+                <h5><?=$elements[$rngElements[1]]["nomePl"]?></h5>
+                <p id="short_desc"><?=$elements[$rngElements[1]]["shortDesc"]?></p>
               </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item" style=" background-image: url('./src/php/pages/<?=$elements[$rngElements[2]]["caminho"]?>')">
               <div class="carousel-caption">
-                <h5>Lorem</h5>
-                <p id="short_desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt accusantium, nulla quibusdam iure, voluptas quae facilis sunt eum exercitationem saepe vero? Magni voluptatum neque assumenda, debitis aliquam tempore. Ut, unde.</p>
+                <h5><?=$elements[$rngElements[2]]["nomePl"]?></h5>
+                <p id="short_desc"><?=$elements[$rngElements[2]]["shortDesc"]?></p>
               </div>
             </div>
           </div>
@@ -195,14 +224,13 @@ var_dump(generateNumber($elements))
       
       <div id="catalog_body">
         <?php while($i !== $qtdElement):  ?>
-            <div id="card_<?=$i?>" class="card">
-              <img src="./src/php/pages/<?=$elements[$i]['caminho']?>" alt="Icon">
-              <div class="container_">
-                <h4><b><?=$elements[$i]['nomePl']?></b></h4>
-                <p id="short_desc"><?=$elements[$i]['shortDesc']?></p>
+          <div class="card" id="card_<?=$i?>" style="width: 18rem; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#subModal">
+              <img src="./src/php/pages/<?=$elements[$i]['caminho']?>" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><?=$elements[$i]['nomePl']?></h5>
+                <p class="card-text"><?=$elements[$i]['shortDesc']?></p>
               </div>
-            </img>
-          </div>
+            </div>
           <?php $i++; ?>
         <?php endwhile; ?>
       </div>
@@ -243,7 +271,7 @@ var_dump(generateNumber($elements))
               <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Recipient's Username" aria-label="Username" aria-describedby="button-addon2">
                 <button class="btn btn-primary" id="button-addon2" type="button">
-                  <i class="fas fa-paper-plane"></i>
+                  <i class="bi bi-envelope-paper"></i>
                 </button>
               </div>
             </form>
