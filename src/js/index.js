@@ -69,5 +69,24 @@ subForm.addEventListener("click", (event) => {
 const subModal = document.getElementById('subModal')
 
 subModal.addEventListener('show.bs.modal', (event) => {
-    console.log(event.relatedTarget)
+    const clickedElement = {
+        main: document.getElementById(event.relatedTarget.id)
+    }
+    const clickedData = {
+        img: clickedElement.main.querySelector('.card-img-top').src,
+        title: clickedElement.main.querySelector('.card-title'),
+        desc: clickedElement.main.querySelector('.card-text')
+    }
+
+    const modalElements = {
+        title: subModal.querySelector("#subModalLabel"),
+        img: subModal.querySelector("#subModalImg"),
+        desc: subModal.querySelector("#subModalDesc")
+    }
+
+    modalElements.title.innerText = clickedData.title.innerText
+    modalElements.img.src = clickedData.img
+    modalElements.desc.innerText = clickedData.desc.innerText
+
+    return console.warn("All Items Added")
 })

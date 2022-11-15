@@ -17,7 +17,6 @@ $qtdElement = count(DB_tables::getFiles(db));
 $i = 0;
 $rngElements = generateNumber($elements);
 
-var_dump($rngElements)
 ?>
 
 
@@ -34,21 +33,22 @@ var_dump($rngElements)
     <link rel="stylesheet" href="./src/css/style.css">
     <link href="./src/bootstrap/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <title>Document</title>
+    <title>GreenMed</title>
 </head>
 <body>
 <div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="subModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="subModalLabel"></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <img src="" alt="" class="rounded img-fluid" id="subModalImg">
+        <p id="subModalDesc"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@ var_dump($rngElements)
 </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="#" id="nav_text">Lorem</a>
+          <a class="navbar-brand" href="#" id="nav_text">GreenMed</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -192,22 +192,22 @@ var_dump($rngElements)
             <button type="button" data-bs-target="#carousel_" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
           <div class="carousel-inner">
-            <div class="carousel-item active" style=" background-image: url('./src/php/pages/<?=$elements[$rngElements[0]]["caminho"]?>')">
+            <div class="carousel-item active" style=" background-image: url('./src/php/pages/<?php echo $elements[$rngElements[0]]["caminho"] ?? 'defaults/default-bg.jpg'; ?>')">
               <div class="carousel-caption">
-                <h5><?=$elements[$rngElements[0]]["nomePl"]?></h5>
-                <p id="short_desc"><?=$elements[$rngElements[0]]["shortDesc"]?></p>
+                <h5><?php echo $elements[$rngElements[0]]["nomePl"] ?? ''; ?></h5>
+                <p id="short_desc"><?php echo $elements[$rngElements[0]]["shortDesc"] ?? ''; ?></p>
               </div>
             </div>
-            <div class="carousel-item" style=" background-image: url('./src/php/pages/<?=$elements[$rngElements[1]]["caminho"]?>')">
+            <div class="carousel-item" style=" background-image: url('./src/php/pages/<?php echo $elements[$rngElements[1]]["caminho"] ?? 'defaults/default-bg.jpg'; ?>')">
               <div class="carousel-caption">
-                <h5><?=$elements[$rngElements[1]]["nomePl"]?></h5>
-                <p id="short_desc"><?=$elements[$rngElements[1]]["shortDesc"]?></p>
+                <h5><?php echo $elements[$rngElements[1]]["nomePl"] ?? ''; ?></h5>
+                <p id="short_desc"><?php echo $elements[$rngElements[1]]["shortDesc"] ?? ''; ?></p>
               </div>
             </div>
-            <div class="carousel-item" style=" background-image: url('./src/php/pages/<?=$elements[$rngElements[2]]["caminho"]?>')">
+            <div class="carousel-item" style=" background-image: url('./src/php/pages/<?php echo $elements[$rngElements[2]]["caminho"] ?? 'defaults/default-bg.jpg'; ?>')">
               <div class="carousel-caption">
-                <h5><?=$elements[$rngElements[2]]["nomePl"]?></h5>
-                <p id="short_desc"><?=$elements[$rngElements[2]]["shortDesc"]?></p>
+                <h5><?php echo $elements[$rngElements[2]]["nomePl"] ?? ''; ?></h5>
+                <p id="short_desc"><?php echo $elements[$rngElements[2]]["shortDesc"] ?? ''; ?></p>
               </div>
             </div>
           </div>

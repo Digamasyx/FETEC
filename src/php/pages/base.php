@@ -53,7 +53,7 @@ function postFile(array $options, array $data): ?array {
       if(move_uploaded_file($_FILES["file"]["tmp_name"], $options[2])) {
         $db_f = new DB_tables(db);
 
-        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2]], db);
+        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3]], db);
 
         return [$db_f, $result];
       }

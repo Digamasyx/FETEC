@@ -230,12 +230,18 @@ footer {
 }
 
 #nav_text_ {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-weight: light;
 }
-#nav_text {
+#nav_text, #nav_text_ {
   font-family: "Roboto", sans-serif;
   font-size: 1.349em;
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(102,102,102,1) 50%, rgb(4, 168, 39) 100%);
+  background-clip: text;
+  background-size: 1400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient_anim 10s linear infinite;
 }
 
 footer div.row {
