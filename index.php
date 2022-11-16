@@ -112,7 +112,7 @@ $rngElements = generateNumber($elements);
             </div>
             <div class="form-group">
               <div class="form-floating mb-3">
-                <select name="regiao" id="formControlSelect" class="form-select">
+                <select name="regiao" id="formControlSelect" class="form-select" required>
                   <option selected></option>
                   <option value="1">Norte</option>
                   <option value="2">Nordeste</option>
@@ -126,7 +126,7 @@ $rngElements = generateNumber($elements);
             <div class="form-group">
               <div class="mb-3">
                 <label for="formControlFile">Imagem</label>
-                <input type="file" class="form-control" name="file" id="formControlFile" aria-label="Upload">
+                <input type="file" class="form-control" name="file" id="formControlFile" aria-label="Upload" required>
                 <small>- Tamanho Máximo do arquivo: 4.0Mb </small>
               </div>
             </div>
