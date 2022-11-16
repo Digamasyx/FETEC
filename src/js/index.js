@@ -36,13 +36,24 @@ Object.freeze(inputs_)
  */
 const reg_main = document.getElementById("reg-main")
 
-openform_a.addEventListener("click", () => {
+let clicked_child, isVisible = false;
+openform_a.addEventListener("click", (event) => {
     for (const child of openform_a.children) {
         if (child.id === "user") {
             mainForm.style.display = "block"
         } else if (child.id === "user_") {
+            clicked_child = child
             userConfig.style.left = getPos(openform_a).offSet.left + "px"
             userConfig.style.display = "block"
+            isVisible = true;
+        }
+    }
+})
+
+window.addEventListener("click", (event) => {
+    if (typeof clicked_child === "object" && isVisible === true && event.target.parentElement.id !== "user_"){
+        if(event.target.offsetParent.id !== "userConfig") {
+            userConfig.style.display = "none"
         }
     }
 })
@@ -69,9 +80,23 @@ subForm.addEventListener("click", (event) => {
 const subModal = document.getElementById('subModal')
 
 subModal.addEventListener('show.bs.modal', (event) => {
-    const clickedElement = {
-        main: document.getElementById(event.relatedTarget.id)
+
+    const REGIOES = {
+        1: "Norte",
+        2: "Nordeste",
+        3: "Sul",
+        4: "Sudeste",
+        5: "Centro Oeste"
     }
+
+    const data = getData()
+
+
+    const clickedElement = {
+        main: document.getElementById(event.relatedTarget.id),
+        idInt: parseInt(document.getElementById(event.relatedTarget.id).id.charAt(document.getElementById(event.relatedTarget.id).id.length - 1), 10)
+    }
+
     const clickedData = {
         img: clickedElement.main.querySelector('.card-img-top').src,
         title: clickedElement.main.querySelector('.card-title'),
@@ -79,14 +104,11 @@ subModal.addEventListener('show.bs.modal', (event) => {
     }
 
     const modalElements = {
-        title: subModal.querySelector("#subModalLabel"),
-        img: subModal.querySelector("#subModalImg"),
-        desc: subModal.querySelector("#subModalDesc")
+        title: subModal.querySelector("#subModalLabel").innerText = clickedData.title.innerText,
+        img: subModal.querySelector("#subModalImg").src = clickedData.img,
+        desc: subModal.querySelector("#subModalDesc").innerText = clickedData.desc.innerText,
+        fullDesc: subModal.querySelector("#subModalFullDesc").innerText = data[clickedElement.idInt]['fullDesc'],
+        nome: subModal.querySelector("#subModalName").innerText = data[clickedElement.idInt]['nomePl'],
+        regiao: subModal.querySelector("#subModalLocal").innerText = REGIOES[data[clickedElement.idInt]['regiao']]
     }
-
-    modalElements.title.innerText = clickedData.title.innerText
-    modalElements.img.src = clickedData.img
-    modalElements.desc.innerText = clickedData.desc.innerText
-
-    return console.warn("All Items Added")
 })

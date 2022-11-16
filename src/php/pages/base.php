@@ -4,6 +4,7 @@ define("__lroot__", dirname(__FILE__, 2));
 use DatabaseCon\DB_tables;
 
 require_once(__lroot__."\imports.php");
+require_once(__broot__."\src\php\def\definitions.php");
 
 function postMethod() {
     if(!empty($_POST["usuario"]) and !empty($_POST["email"]) and !empty($_POST["senha"])) {
@@ -38,8 +39,8 @@ function postFile(array $options, array $data): ?array {
       } else {
         $fileExists[0] = false;
       }
-      if (!file_exists("files/".$_SESSION['user']."/") and $fileExists[0] === true) {
-        mkdir('files/'.$_SESSION['user']."/", 0777);
+      if (!file_exists("files/".$data[3]."/") and $fileExists[0] === true) {
+        mkdir('files/'.$data[3]."/", 0777);
         $fileExists[1] = true;
       }
     } catch (Exception $e) {
@@ -48,12 +49,12 @@ function postFile(array $options, array $data): ?array {
 
     $allowedTypes = array('jpg', 'png','jpeg');
 
-    if(in_array($options[3], $allowedTypes)) {
+    if(in_array($options[3], tiposPermitidos)) {
 
       if(move_uploaded_file($_FILES["file"]["tmp_name"], $options[2])) {
         $db_f = new DB_tables(db);
 
-        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3]], db);
+        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3], $data[4]], db);
 
         return [$db_f, $result];
       }

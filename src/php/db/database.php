@@ -32,11 +32,11 @@ class DB_tables {
         nomePl varchar(255) NOT NULL,
         dataCriacao DATETIME NOT NULL,
         regiao INT NOT NULL,
-        descricao varchar(255) NOT NULL,
         shortDesc varchar(255) NOT NULL,
         nomeImagem varchar(255) NOT NULL,
         caminho varchar(255) NOT NULL,
         criador varchar(255) NOT NULL,
+        fullDesc text NOT NULL,
         idPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY)";
         $stm = $db->prepare($sql);
         $hasCreated = ($stm->execute()) ? true : false;
@@ -89,7 +89,7 @@ class DB_tables {
     public function postFiles(array $data_, $db): bool
     {
         $data = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc, criador) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]', '$data_[5]')";
+        $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc, criador, fullDesc) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]', '$data_[5]', '$data_[6]')";
 
         $stm = $db->prepare($sql);
         if($stm->execute()) {

@@ -13,6 +13,8 @@ define("Regioes", array(
        "CENTRO_OESTE" => 5)
 );
 
+define("tiposPermitidos", array('jpg', 'png', 'jpeg', 'gif'));
+
 function generateNumber(array $element): array {
        $min = (int) 0;
        $max = (int) count($element)-1;
@@ -55,6 +57,8 @@ function ExceptionHandlerFunction($errNo, $errStr, $errFile, $errLine) {
        return true;
 }
 
-set_error_handler('ExceptionHandlerFunction')
+set_error_handler('ExceptionHandlerFunction');
+
+
 
 ?>

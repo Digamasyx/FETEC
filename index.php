@@ -36,19 +36,48 @@ $rngElements = generateNumber($elements);
     <title>GreenMed</title>
 </head>
 <body>
-<div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="subModalLabel"></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <img src="" alt="" class="rounded img-fluid" id="subModalImg">
-        <p id="subModalDesc"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+  <div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="subModalLabel"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="" alt="" class="rounded img-fluid" id="subModalImg">
+          <div class="accordion accordion-flush" id="accordionFlush">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Descrição
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlush">
+                <div class="accordion-body">
+                  <div><b>Descrição Curta:</b> <p id="subModalDesc"></p></div>
+                  <div><b>Descrição Completa:</b> <p id="subModalFullDesc"></p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion accordion-flush" id="accordionFlush_">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  Dados
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlush_">
+                <div class="accordion-body">
+                  <div><b>Nome Da Planta:</b> <p id="subModalName"></p></div>
+                  <div><b>Região:</b> <p id="subModalLocal"></p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -63,25 +92,38 @@ $rngElements = generateNumber($elements);
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="formControlInpt">Nome Da Planta</label>
-              <input type="text" name="nomePL" id="formControlInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)">
-              <label for="shortDescInpt">Descrição Curta</label>
-              <input type="text" name="shortDesc" id="shortDescInpt" placeholder="Descrição Curta" class="form-control">
+              <div class="form-floating mb-3">
+                <input type="text" name="nomePL" id="formControlInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)" required>
+                <label for="formControlInpt">Nome Da Planta</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" name="shortDesc" id="shortDescInpt" placeholder="Descrição Curta" class="form-control" required>
+                <label for="shortDescInpt">Descrição Curta</label>
+              </div>
+              <div class="mb-3">
+                <label for="message-text" >Descrição Completa</label>
+                <textarea class="form-control" id="message-text" name="fullDesc" rows="5"></textarea>
+              </div>
             </div>
             <div class="form-group">
-              <label for="formControlSelect">Região</label>
-              <select name="regiao" id="formControlSelect" class="form-select">
-                <option selected>Região</option>
-                <option value="1">Norte</option>
-                <option value="2">Nordeste</option>
-                <option value="3">Sul</option>
-                <option value="4">Sudeste</option>
-                <option value="5">Centro-Oeste</option>
-              </select>
+              <div class="form-floating mb-3">
+                <select name="regiao" id="formControlSelect" class="form-select">
+                  <option selected></option>
+                  <option value="1">Norte</option>
+                  <option value="2">Nordeste</option>
+                  <option value="3">Sul</option>
+                  <option value="4">Sudeste</option>
+                  <option value="5">Centro-Oeste</option>
+                </select>
+                <label for="formControlSelect">Região</label>
+              </div>
             </div>
             <div class="form-group">
-              <label for="formControlFile">Imagem</label>
-              <input type="file" class="form-control" name="file" id="formControlFile" aria-label="Upload">
+              <div class="mb-3">
+                <label for="formControlFile">Imagem</label>
+                <input type="file" class="form-control" name="file" id="formControlFile" aria-label="Upload">
+                <small>- Tamanho Máximo do arquivo: 4.0Mb </small>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -104,14 +146,11 @@ $rngElements = generateNumber($elements);
                 <a class="nav-link" id="nav_text_" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="nav_text_" href="#">Sobre</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="nav_text_" href="#">Social</a>
+                <a class="nav-link" id="nav_text_" href="#sobreInfo">Sobre</a>
               </li>
               <li class="nav-item">
                 <div id="user-li">
-                  <a href="#" class="navbar-brand user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>">
+                  <a href="#" class="nav-link user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>">
                     <i class="bi bi-person-circle"></i>
                   </a>
                 </div>
@@ -162,7 +201,7 @@ $rngElements = generateNumber($elements);
           </div>
           <div class="user-container" id="userConfig">
             <div class="user-popup">
-                <h5>Olá! <?php echo $__isSessionSet ? $_SESSION["user"] : 'default' ?></h5>
+                <h5 id="userName">Olá! <?php echo $__isSessionSet ? $_SESSION["user"] : 'default' ?></h5>
                 <form action="" method="post">
                   <div class="configurarConta">
                     <button type="submit">
@@ -235,7 +274,7 @@ $rngElements = generateNumber($elements);
         <?php endwhile; ?>
       </div>
 
-    <footer class="w-100 py-4 flex-shrink-0">
+    <footer class="w-100 py-4 flex-shrink-0" id="sobreInfo">
       <div id="shadow"><div id="grad_anim"></div></div>
       <div class="container-fluid py-4">
         <div class="row gy-4 gx-5">
