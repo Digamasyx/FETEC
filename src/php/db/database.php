@@ -30,6 +30,7 @@ class DB_tables {
         idUsuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY)";
         $sql_ = "CREATE TABLE IF NOT EXISTS posts (
         nomePl varchar(255) NOT NULL,
+        nomeCientifico varchar(255) NOT NULL,
         dataCriacao DATETIME NOT NULL,
         regiao INT NOT NULL,
         shortDesc varchar(255) NOT NULL,
@@ -89,7 +90,7 @@ class DB_tables {
     public function postFiles(array $data_, $db): bool
     {
         $data = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc, criador, fullDesc) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]', '$data_[5]', '$data_[6]')";
+        $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc, criador, fullDesc, nomeCientifico) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]', '$data_[5]', '$data_[6]', '$data_[7]')";
 
         $stm = $db->prepare($sql);
         if($stm->execute()) {

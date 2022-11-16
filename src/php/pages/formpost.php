@@ -23,7 +23,7 @@ while (true) {
     }
 }
 
-$data = array($_POST["nomePL"], $_POST["regiao"], $_POST["shortDesc"], $_SESSION["user"], $_POST["fullDesc"]);
+$data = array($_POST["nomePL"], $_POST["regiao"], $_POST["shortDesc"], $_SESSION["user"], $_POST["fullDesc"], $_POST["nomeCientifico"]);
 
 
 [$class, $result] = postFile([$targetDir, $fileName, $targetPath, $fileType], $data);

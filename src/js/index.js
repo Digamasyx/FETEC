@@ -109,6 +109,7 @@ subModal.addEventListener('show.bs.modal', (event) => {
         desc: subModal.querySelector("#subModalDesc").innerText = clickedData.desc.innerText,
         fullDesc: subModal.querySelector("#subModalFullDesc").innerText = data[clickedElement.idInt]['fullDesc'],
         nome: subModal.querySelector("#subModalName").innerText = data[clickedElement.idInt]['nomePl'],
-        regiao: subModal.querySelector("#subModalLocal").innerText = REGIOES[data[clickedElement.idInt]['regiao']]
+        regiao: subModal.querySelector("#subModalLocal").innerText = REGIOES[data[clickedElement.idInt]['regiao']],
+        nomeCientifico: subModal.querySelector("#subModalSurName").innerText = data[clickedElement.idInt]['nomeCientifico']
     }
 })

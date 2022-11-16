@@ -70,6 +70,7 @@ $rngElements = generateNumber($elements);
               <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlush_">
                 <div class="accordion-body">
                   <div><b>Nome Da Planta:</b> <p id="subModalName"></p></div>
+                  <div><b>Nome Cientifico Da Planta:</b> <p id="subModalSurName"></p></div>
                   <div><b>Região:</b> <p id="subModalLocal"></p></div>
                 </div>
               </div>
@@ -95,6 +96,10 @@ $rngElements = generateNumber($elements);
               <div class="form-floating mb-3">
                 <input type="text" name="nomePL" id="formControlInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)" required>
                 <label for="formControlInpt">Nome Da Planta</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" name="nomeCientifico" id="formControlSurInpt" class="form-control" placeholder="Nome da planta (EX. Aloe Vera)" required>
+                <label for="formControlSurInpt">Nome Cientifico</label>
               </div>
               <div class="form-floating mb-3">
                 <input type="text" name="shortDesc" id="shortDescInpt" placeholder="Descrição Curta" class="form-control" required>

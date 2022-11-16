@@ -47,14 +47,13 @@ function postFile(array $options, array $data): ?array {
         echo $e->getMessage();
     }
 
-    $allowedTypes = array('jpg', 'png','jpeg');
 
     if(in_array($options[3], tiposPermitidos)) {
 
       if(move_uploaded_file($_FILES["file"]["tmp_name"], $options[2])) {
         $db_f = new DB_tables(db);
 
-        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3], $data[4]], db);
+        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3], $data[4], $data[5]], db);
 
         return [$db_f, $result];
       }
