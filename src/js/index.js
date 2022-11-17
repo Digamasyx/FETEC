@@ -13,7 +13,7 @@ subModal.addEventListener('show.bs.modal', (event) => {
         5: "Centro Oeste"
     }
 
-    const data = Getter.getData()
+    const data = Getter.getData("data")
 
 
     const clickedElement = {

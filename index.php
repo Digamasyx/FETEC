@@ -36,7 +36,7 @@ $rngElements = generateNumber($elements);
     <title>GreenMed</title>
 </head>
 <body>
-  <div class="offcanvas offcanvas-lg offcanvas-top" tabindex="-1" aria-labelledby="mainOffCanvas" id="mainOffCanvas">
+  <div class="offcanvas offcanvas-top" tabindex="-1" aria-labelledby="mainOffCanvas" id="mainOffCanvas">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="mainCanvasLabel">Login</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -44,17 +44,23 @@ $rngElements = generateNumber($elements);
     <div class="offcanvas-body">
       <form action="src/php/pages/formlog.php" method="POST">
         <div class="input-group form-floating mb-3">
-          <input type="email" name="email_" id="floatingEmail" class="form-control" placeholder="Email">
+          <input type="email" name="email_" id="floatingEmail" class="form-control" placeholder="Email" required>
           <label for="floatingInput">Endereço de Email</label>
         </div>
         <div class="input-group form-floating mb-3">
-          <input type="password" name="senha" id="floatingPassword" class="form-control" placeholder="Senha">
+          <input type="password" name="senha" id="floatingPassword" class="form-control" placeholder="Senha" required>
           <label for="floatingPassword">Senha</label>
         </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
       </form>
     </div>
   </div>
+  <!-- Todo Server-Side Validation -->
+  <!-- Todo Offcanvas Regmodal (Offcanvas end "Right Side")
+      inputs names = usuarios (type="text")
+             names = email (type="email")
+             names = senha (type="password")
+-->
   <div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -207,27 +213,6 @@ $rngElements = generateNumber($elements);
               <button type="button" class="btnf-sub cancel hvr-icon-rotate" id="closeF-sub">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
               </button>
             </form>
-          </div>
-          <div class="user-container" id="userConfig">
-            <div class="user-popup">
-                <h5 id="userName">Olá! <?php echo $__isSessionSet ? $_SESSION["user"] : 'default' ?></h5>
-                <form action="" method="post">
-                  <div class="configurarConta">
-                    <button type="submit">
-                      <p>Configurações</p>
-                      <i class="fas fa-solid fa-gear"></i>
-                    </button>
-                  </div>
-                </form>
-                <form action="index.php" method="post">
-                  <div class="sairConta" id="sair-conta">
-                    <button type="submit" name="sair" value="true">
-                      <p>Encerrar Sessão</p>
-                      <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    </button>
-                  </div>
-                </form>
-            </div>
           </div>
         </div>
       </nav>

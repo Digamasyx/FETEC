@@ -1,12 +1,19 @@
 export default class Getter {
 
-    static getData() {
+    static getData(type = "") {
     
         const req = new XMLHttpRequest();
     
-        
-        req.open("get", "./../../src/php/fun/sendData.php", false);
-        req.send(null);
+        switch (type){
+            case "data":
+                req.open("get", "./../../src/php/fun/sendData.php", false);
+                req.send(null);
+                break;
+            case "validation":
+                req.open("post", "./../../src/php/fun/validation.php", false);
+                req.send(null);
+                break;
+        }
     
         return JSON.parse(req.responseText);
         

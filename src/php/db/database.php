@@ -113,6 +113,15 @@ class DB_tables {
 
         return $data;
     }
+    public static function pushData($db): array {
+        $sql = "SELECT nome, email from usuarios";
+        $stm = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stm->execute();
+
+        $data = (array) $stm->fetchAll();
+
+        return $data;
+    }
 }
 
 class Session {
