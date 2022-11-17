@@ -27,6 +27,7 @@ class DB_tables {
         dataCriacao DATETIME NOT NULL,
         senha varchar(128) NOT NULL,
         email varchar(255) NOT NULL,
+        pseudoId BIGINT NOT NULL,
         idUsuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY)";
         $sql_ = "CREATE TABLE IF NOT EXISTS posts (
         nomePl varchar(255) NOT NULL,

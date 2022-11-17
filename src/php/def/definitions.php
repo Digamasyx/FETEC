@@ -13,7 +13,7 @@ define("Regioes", array(
        "CENTRO_OESTE" => 5)
 );
 
-define("tiposPermitidos", array('jpg', 'png', 'jpeg', 'gif'));
+define("tiposPermitidos", array('jpg', 'png', 'jpeg', 'gif', 'webp'));
 
 function generateNumber(array $element): array {
        $min = (int) 0;

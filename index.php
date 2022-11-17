@@ -36,6 +36,25 @@ $rngElements = generateNumber($elements);
     <title>GreenMed</title>
 </head>
 <body>
+  <div class="offcanvas offcanvas-lg offcanvas-top" tabindex="-1" aria-labelledby="mainOffCanvas" id="mainOffCanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="mainCanvasLabel">Login</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <form action="src/php/pages/formlog.php" method="POST">
+        <div class="input-group form-floating mb-3">
+          <input type="email" name="email_" id="floatingEmail" class="form-control" placeholder="Email">
+          <label for="floatingInput">Endereço de Email</label>
+        </div>
+        <div class="input-group form-floating mb-3">
+          <input type="password" name="senha" id="floatingPassword" class="form-control" placeholder="Senha">
+          <label for="floatingPassword">Senha</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+    </div>
+  </div>
   <div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -127,7 +146,8 @@ $rngElements = generateNumber($elements);
               <div class="mb-3">
                 <label for="formControlFile">Imagem</label>
                 <input type="file" class="form-control" name="file" id="formControlFile" aria-label="Upload" required>
-                <small>- Tamanho Máximo do arquivo: 4.0Mb </small>
+                <small>- <b>Tamanho Máximo do arquivo: 4.0Mb</b> </small><br>
+                <small>- <b>Tipos Aceitos: .jpg, .png, .jpeg, .gif, .webp</b></small>
               </div>
             </div>
           </div>
@@ -155,7 +175,7 @@ $rngElements = generateNumber($elements);
               </li>
               <li class="nav-item">
                 <div id="user-li">
-                  <a href="#" class="nav-link user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>">
+                  <a data-bs-target="#mainOffCanvas" role="button" aria-controls="mainOffCanvas" class="nav-link user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>" data-bs-toggle="offcanvas">
                     <i class="bi bi-person-circle"></i>
                   </a>
                 </div>
@@ -168,22 +188,6 @@ $rngElements = generateNumber($elements);
                 </div>
               </li>
             </ul>
-          </div>
-          <div class="form-popup" id="mainForm">
-            <form action="src/php/pages/formlog.php" method="POST" class="form-container" id="main-form">
-              <h1>Login</h1>
-
-              <label for="email"><b>Email</b></label>
-              <input type="text" placeholder="Insira o Email" name="email_" id="mailInpt" required>
-          
-              <label for="psw"><b>Senha</b></label>
-              <input type="password" placeholder="Insira a Senha" name="senha" id="passInpt" required>
-              <p id="warning-text" style="display: none;">CapsLock Ativado!</p>
-              <a id="reg-main" class="reg-main">Não possui conta? Registre-se</a>
-              <button type="submit" class="btnf">Login</button>
-              <button type="button" class="btnf cancel hvr-icon-rotate" id="closeF">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
-              </button>
-            </form>
           </div>
           <div class="form-popup-sub" id="subForm">
             <form action="src/php/pages/formreg.php" method="POST" class="form-container-sub" name="login">

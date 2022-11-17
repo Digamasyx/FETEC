@@ -9,9 +9,9 @@ use DatabaseCon\DB_tables;
 
 $result = new DatabaseCon(dsn, user, password);
 
-if ($result->errCode === 0) {
+try {
     new DB_tables(db);
-} else if ($result->errCode === 1) {
+} catch (\Exception $e) {
     throw new \Exception($e->getMessage(), (int)$e->getCode());
 }
 

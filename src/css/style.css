@@ -309,3 +309,12 @@ footer div.row {
 #userName {
   padding-left: 1em;
 }
+
+
+#floatingEmail, #floatingPassword {
+  border-radius: 0.375rem !important;
+}
+
+#floatingEmail:focus, #floatingPassword:focus {
+  z-index: unset;
+}

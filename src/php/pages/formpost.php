@@ -1,7 +1,8 @@
 <?php 
 
-session_start(["name" => "Session"]);
-
+if (!isset($_SESSION)) {
+    session_start(["name" => "Session"]);
+}
 require_once("base.php");
 
 if (!$_SERVER["REQUEST_METHOD"] === "POST" or !$_SERVER["REQUEST_METHOD"] === "GET") { return; }
