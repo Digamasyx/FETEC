@@ -17,6 +17,8 @@ $qtdElement = count(DB_tables::getFiles(db));
 $i = 0;
 $rngElements = generateNumber($elements);
 
+var_dump($_SESSION)
+
 ?>
 
 
@@ -36,7 +38,7 @@ $rngElements = generateNumber($elements);
     <title>GreenMed</title>
 </head>
 <body>
-  <div class="offcanvas offcanvas-top" tabindex="-1" aria-labelledby="mainOffCanvas" id="mainOffCanvas">
+  <div class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="mainOffCanvas" id="mainOffCanvas">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="mainCanvasLabel">Login</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
@@ -51,9 +53,44 @@ $rngElements = generateNumber($elements);
           <input type="password" name="senha" id="floatingPassword" class="form-control" placeholder="Senha" required>
           <label for="floatingPassword">Senha</label>
         </div>
+        <div class="input-group mb-3">
+          <small>
+            <a role="button" data-bs-toggle="offcanvas" href="#subOffCanvas">Não Possui Conta? Registre-se</a>
+          </small>
+        </div>
         <button type="submit" class="btn btn-primary">Entrar</button>
       </form>
     </div>
+  </div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="subOffCanvas">
+      <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="mainCanvasLabel">Registro</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+          <form action="src/php/pages/formreg.php" method="POST">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">#</span>
+              <input type="hidden" id="basic-addon2_" name="pseudoid">
+              <input type="text" name="usuario" id="floatingUsername" placeholder="Nome De Usuário" required class="form-control" aria-describedby="basic-addon1">
+              <input type="button" class="btn btn-outline-secondary" id="basic-addon2" data-bs-toggle="tooltip" data-bs-title="Clique para gerar outro Id"></input>
+            </div>
+            <div class="input-group form-floating mb-3">
+              <input type="email" name="email" id="floatingSubEmail" placeholder="Endereço de email" required class="form-control">
+              <label for="floatingSubEmail">Endereço De Email</label>
+            </div>
+            <div class="input-group form-floating mb-3">
+              <input type="password" name="senha" id="floatingSubPassword" placeholder="Endereço de email" required class="form-control">
+              <label for="floatingSubPassword">Senha</label>
+            </div>
+            <div class="input-group mb-3">
+              <small>
+                  <a role="button" data-bs-toggle="offcanvas" href="#mainOffCanvas">Já Possui Conta?</a>
+              </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+          </form>
+      </div>
   </div>
   <!-- Todo Server-Side Validation -->
   <!-- Todo Offcanvas Regmodal (Offcanvas end "Right Side")

@@ -8,7 +8,7 @@ require_once(__broot__."\src\php\def\definitions.php");
 
 function postMethod() {
     if(!empty($_POST["usuario"]) and !empty($_POST["email"]) and !empty($_POST["senha"])) {
-    $data = array($_POST["usuario"], password_hash($_POST["senha"], PASSWORD_BCRYPT), $_POST["email"]);
+    $data = array($_POST["usuario"], password_hash($_POST["senha"], PASSWORD_BCRYPT), $_POST["email"], $_POST["pseudoid"]);
     $db_c = new DB_tables(db);
     $result = $db_c->postData($data, db);
 

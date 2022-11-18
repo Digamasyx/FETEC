@@ -13,6 +13,9 @@ export default class Getter {
                 req.open("post", "./../../src/php/fun/validation.php", false);
                 req.send(null);
                 break;
+            case "pseudoid":
+                req.open("get", "./../../src/php/fun/getPseudoId.php", false);
+                req.send(null);
         }
     
         return JSON.parse(req.responseText);

@@ -38,3 +38,31 @@ subModal.addEventListener('show.bs.modal', (event) => {
     }
 
 })
+
+const subCanvas = document.getElementById("subOffCanvas");
+const pseudoId = document.getElementById("basic-addon2");
+const pseudoId_ = document.getElementById("basic-addon2_")
+
+subCanvas.addEventListener("show.bs.offcanvas", (event) => {
+    let value = Getter.getData("pseudoid");
+
+    const PseudoChange = {
+        value: pseudoId.value = value,
+        text: pseudoId.innerText = value,
+        value_: pseudoId_.value = value,
+    }
+
+    subCanvas.addEventListener("shown.bs.offcanvas", (event) => {
+        pseudoId.addEventListener("click", () => {
+            value = Getter.getData("pseudoid");
+            PseudoChange.value = pseudoId.value = value
+            PseudoChange.value_ = pseudoId_.value = value
+            PseudoChange.text = pseudoId.innerText = value
+        })
+    })
+})
+
+
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));

@@ -2,7 +2,7 @@
 namespace DatabaseCon;
 
 use PDO;
-
+use PDOStatement;
 
 class DatabaseCon {
     public int $errCode;
@@ -54,16 +54,16 @@ class DB_tables {
      * $post[1] == Senha (Bycrypt)
      * $post[2] == Email
      */
-    public function postData(array $post, $db): bool {
+    public function postData(array $post, $db): mixed {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
         $test_exist = "SELECT * FROM usuarios WHERE email = '$post[2]'";
         $exec = $db->prepare($test_exist);
         $exec->execute();
-        if ($exec->fetchColumn() >= 1) {
+        if ($exec->fetchColumn() !== FALSE) {
             return FALSE;
         }
-        $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]')";
+        $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email, pseudoId) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]', '$post[3]')";
         $stm = $db->prepare($sql);
         $stm->execute();
 
@@ -121,6 +121,29 @@ class DB_tables {
         $data = (array) $stm->fetchAll();
 
         return $data;
+    }
+    public static function getPseudoId($db, int $value): mixed {
+        $sql = "SELECT pseudoId FROM usuarios WHERE pseudoId=$value";
+        $stm = $db->prepare($sql);
+        $stm->execute();
+
+        if ($stm->fetchColumn() !== FALSE) {
+            return TRUE; 
+        } else {
+            return FALSE; 
+        }
+
+
+    }
+
+    public static function userPseudoId(int $max, int $min, $db) {
+           $rand = (int) random_int($min, $max);
+
+           while(DB_tables::getPseudoId($db, $rand)) {
+            echo $rand . "\n";
+            $rand = (int) random_int($min, $max);
+        }
+        return $rand;
     }
 }
 
