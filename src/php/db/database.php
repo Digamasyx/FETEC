@@ -75,9 +75,9 @@ class DB_tables {
      * $get[1] == Senha já com bycrpt
      *
     */
-    public function getData(array $get, $db): bool {
+    public function getData(array $get, $db): mixed {
 
-        $sql = "SELECT * FROM usuarios WHERE email = '$get[0]'" or die();
+        $sql = "SELECT * FROM usuarios WHERE email = '$get[0]'";
         $stm = $db->prepare($sql);
         $stm->execute();
         $this->row = $stm->fetch(PDO::FETCH_ASSOC);
@@ -88,16 +88,20 @@ class DB_tables {
         }
     }
     
-    public function postFiles(array $data_, $db): bool
+    public function postFiles(array $data_, $db): mixed
     {
         $data = date("Y-m-d H:i:s");
         $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc, criador, fullDesc, nomeCientifico) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]', '$data_[5]', '$data_[6]', '$data_[7]')";
+        $test_exist = "SELECT * FROM posts WHERE nomePl = '$data_[0]'";
+        $exec = $db->prepare($test_exist);
+        $exec->execute();
+        if ($exec->fetchColumn() !== FALSE) {
+            return FALSE;
+        }
 
         $stm = $db->prepare($sql);
         if($stm->execute()) {
             return TRUE;
-        } else {
-            return FALSE;
         }
     }
 
@@ -136,7 +140,7 @@ class DB_tables {
 
     }
 
-    public static function userPseudoId(int $max, int $min, $db) {
+    public static function userPseudoId(int $max, int $min, $db): int {
            $rand = (int) random_int($min, $max);
 
            while(DB_tables::getPseudoId($db, $rand)) {
@@ -156,7 +160,7 @@ class Session {
 
     private static $instance;
 
-    private function __construct()
+    public function __construct()
     {
         
     }

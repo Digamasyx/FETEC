@@ -1,7 +1,9 @@
 // Imports
-import { default as Getter } from './functions/index.js' 
+import Getter from './functions/index.js' 
 
-const subModal = document.getElementById('subModal')
+const subModal = document.getElementById('subModal');
+const subOffCanvas = document.getElementById("subSubOffCanvas");
+const Getter_ = new Getter();
 
 subModal.addEventListener('show.bs.modal', (event) => {
 
@@ -13,7 +15,7 @@ subModal.addEventListener('show.bs.modal', (event) => {
         5: "Centro Oeste"
     }
 
-    const data = Getter.getData("data")
+    const data = Getter_.getData("data")
 
 
     const clickedElement = {
@@ -44,7 +46,7 @@ const pseudoId = document.getElementById("basic-addon2");
 const pseudoId_ = document.getElementById("basic-addon2_")
 
 subCanvas.addEventListener("show.bs.offcanvas", (event) => {
-    let value = Getter.getData("pseudoid");
+    let value = Getter_.getData("pseudoid");
 
     const PseudoChange = {
         value: pseudoId.value = value,
@@ -54,7 +56,7 @@ subCanvas.addEventListener("show.bs.offcanvas", (event) => {
 
     subCanvas.addEventListener("shown.bs.offcanvas", (event) => {
         pseudoId.addEventListener("click", () => {
-            value = Getter.getData("pseudoid");
+            value = Getter_.getData("pseudoid");
             PseudoChange.value = pseudoId.value = value
             PseudoChange.value_ = pseudoId_.value = value
             PseudoChange.text = pseudoId.innerText = value
@@ -62,7 +64,28 @@ subCanvas.addEventListener("show.bs.offcanvas", (event) => {
     })
 })
 
+subOffCanvas.addEventListener("show.bs.offcanvas", (event) => {
+    const exit = document.getElementById("exitBtn");
+
+    exit.addEventListener("click", () => {
+        Getter_.destroySession();
+    })
+})
 
 
+window.addEventListener("load", () => {
+    try {
+        const toast = document.getElementById("liveToast");
+        const err = {
+            msg: document.getElementById("errorMsg"),
+            val: document.getElementById("errorVal")
+        }
+        Getter_.accExists(toast, [err]);
+    } catch (e) {
+        throw console.log(e);
+    }
+})
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+const toastElList = document.querySelectorAll('.toast')
+const toastList = [...toastElList].map(toastEl => new bootstrap.Toast(toastEl))

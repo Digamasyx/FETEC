@@ -12,13 +12,13 @@ if ($__exitSession) {
   $__isSessionSet = false;
 }
 
+$dataUser = (string) $_SESSION["user"];
+$datapseudoId = (int) $_SESSION["pseudoid"];
+
 $elements = DB_tables::getFiles(db);
 $qtdElement = count(DB_tables::getFiles(db));
 $i = 0;
 $rngElements = generateNumber($elements);
-
-var_dump($_SESSION)
-
 ?>
 
 
@@ -38,6 +38,22 @@ var_dump($_SESSION)
     <title>GreenMed</title>
 </head>
 <body>
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bug rounded-2 me-2" viewBox="0 0 16 16">
+          <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A4.979 4.979 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A4.985 4.985 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623zM4 7v4a4 4 0 0 0 3.5 3.97V7H4zm4.5 0v7.97A4 4 0 0 0 12 11V7H8.5zM12 6a3.989 3.989 0 0 0-1.334-2.982A3.983 3.983 0 0 0 8 2a3.983 3.983 0 0 0-2.667 1.018A3.989 3.989 0 0 0 4 6h8z"/>
+        </svg>
+        <strong class="me-auto">Erro</strong>
+        <small class="text-muted">Agora</small>
+        <button class="btn-close" type="button" data-bs-dismiss="toast" aria-label="close"></button>
+      </div>
+      <div class="toast-body">
+        <p id="errorMsg">Ocorreu um erro:</p>
+        <small id="errorVal">ERRO:</small>
+      </div>
+    </div>
+  </div>
   <div class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="mainOffCanvas" id="mainOffCanvas">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="mainCanvasLabel">Login</h5>
@@ -80,7 +96,7 @@ var_dump($_SESSION)
               <label for="floatingSubEmail">Endereço De Email</label>
             </div>
             <div class="input-group form-floating mb-3">
-              <input type="password" name="senha" id="floatingSubPassword" placeholder="Endereço de email" required class="form-control">
+              <input type="password" name="senha_" id="floatingSubPassword" placeholder="Endereço de email" required class="form-control">
               <label for="floatingSubPassword">Senha</label>
             </div>
             <div class="input-group mb-3">
@@ -92,12 +108,21 @@ var_dump($_SESSION)
           </form>
       </div>
   </div>
-  <!-- Todo Server-Side Validation -->
-  <!-- Todo Offcanvas Regmodal (Offcanvas end "Right Side")
-      inputs names = usuarios (type="text")
-             names = email (type="email")
-             names = senha (type="password")
--->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="subSubOffCanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Usuário</h5>
+      <button type="button" data-bs-dismiss="offcanvas" class="btn-close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <p class="fs-5">Olá! <?php echo($__isSessionSet ? "$dataUser" : "default") . "#$datapseudoId"; ?></p>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button id="exitBtn" type="button" class="btn btn-outline-danger">
+            <i class="bi bi-box-arrow-right"></i>
+            Sair
+          </button>
+        </div>
+      </div>
+  </div>
   <div class="modal fade" id="subModal" tabindex="-1" aria-labelledby="subModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -218,7 +243,7 @@ var_dump($_SESSION)
               </li>
               <li class="nav-item">
                 <div id="user-li">
-                  <a data-bs-target="#mainOffCanvas" role="button" aria-controls="mainOffCanvas" class="nav-link user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>" data-bs-toggle="offcanvas">
+                  <a data-bs-target="<?php echo $__isSessionSet ? "#subSubOffCanvas" : "#mainOffCanvas" ?>" role="button" aria-controls="mainOffCanvas" class="nav-link user d-inline-block" id="<?php echo $__isSessionSet  ? "user_" : "user"; ?>" data-bs-toggle="offcanvas">
                     <i class="bi bi-person-circle"></i>
                   </a>
                 </div>
@@ -231,25 +256,6 @@ var_dump($_SESSION)
                 </div>
               </li>
             </ul>
-          </div>
-          <div class="form-popup-sub" id="subForm">
-            <form action="src/php/pages/formreg.php" method="POST" class="form-container-sub" name="login">
-              <h1>Registro</h1>
-
-              <label for="usuario"><b>Usuario</b></label>
-              <input type="text" name="usuario" placeholder="Insira seu nome" id="userInpt" required="required">
-          
-              <label for="email"><b>Email</b></label>
-              <input type="text" placeholder="Insira o Email" name="email" id="subMailInpt" required>
-          
-              <label for="psw"><b>Senha</b></label>
-              <input type="password" placeholder="Insira a Senha" name="senha" id="subPassInpt" required>
-          
-              <p id="warning-text-" style="display: none;">CapsLock Ativado!</p>
-              <button type="submit" class="btnf-sub">Registro</button>
-              <button type="button" class="btnf-sub cancel hvr-icon-rotate" id="closeF-sub">Fechar <i class="fa-solid fa-xmark hvr-icon"></i>
-              </button>
-            </form>
           </div>
         </div>
       </nav>

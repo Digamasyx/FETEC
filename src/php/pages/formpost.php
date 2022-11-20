@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 }
 require_once("base.php");
 
-if (!$_SERVER["REQUEST_METHOD"] === "POST" or !$_SERVER["REQUEST_METHOD"] === "GET") { return; }
+if (!$_SERVER["REQUEST_METHOD"] === "POST" or !$_SERVER["REQUEST_METHOD"] === "GET") { header("location: ". $_SERVER["HTTP_REFERER"]); }
 
 $i = 1;
 
@@ -31,6 +31,14 @@ $data = array($_POST["nomePL"], $_POST["regiao"], $_POST["shortDesc"], $_SESSION
 
 
 if ($result) {
-    header("location: ". $_SERVER["HTTP_REFERER"]);
+    $notExists = "POSTNOTEXISTS";
+    $set = (bool) setcookie("postExists", $notExists, time()+1, "/");
+    if ($set) header("location: ". $_SERVER["HTTP_REFERER"]);
+} else if (!$result) {
+    $exists_ = "POSTEXISTS";
+    $set = (bool) setcookie("postExists", $exists_, time()+1, "/");
+    if ($set) {
+        header("location: ". $_SERVER["HTTP_REFERER"]);
+    }
 }
 ?>

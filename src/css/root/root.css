@@ -20,6 +20,12 @@
     --df-footer-padding: 1em;
     --grad-height: 4px;
 
+    --danger: rgba(220, 53, 69, 1);
+    --bs-gray-100: #f8f9fa;
+    --bs-gray-300: #dee2e6;
+    --bd-callout-bg: rgba(var(--danger), .075);
+    --bd-callout-border: rgba(var(--danger), .5);
+
 
     /* Colors */
 

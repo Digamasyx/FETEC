@@ -7,11 +7,13 @@ require_once("base.php");
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     [$cClass, $result] = postMethod();
     if ($result) {
-        header("location: ". $_SERVER["HTTP_REFERER"]);
+        $notExists = "NOTEXISTS";
+        $set = (bool) setcookie("accExists", $notExists, time()+1, "/");
+        if ($set) header("location: ". $_SERVER["HTTP_REFERER"]);
     } else if (!$result) {
-        $cryptExists = password_hash("EXISTS", PASSWORD_BCRYPT);
-        $set = setcookie("__cookie", $cryptExists, time()+60, "/");
-        if($set) {
+        $exists_ = "EXISTS";
+        $set = (bool) setcookie("accExists", $exists_, time()+1, "/");
+        if ($set) {
             header("location: ". $_SERVER["HTTP_REFERER"]);
         }
     }
