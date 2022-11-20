@@ -57,10 +57,10 @@ class DB_tables {
     public function postData(array $post, $db): mixed {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
-        $test_exist = "SELECT * FROM usuarios WHERE email = '$post[2]'";
+        $test_exist = "SELECT COUNT(email) FROM usuarios WHERE email = '$post[2]'";
         $exec = $db->prepare($test_exist);
         $exec->execute();
-        if ($exec->fetchColumn() !== FALSE) {
+        if ($exec->fetchColumn() > 0) {
             return FALSE;
         }
         $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email, pseudoId) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]', '$post[3]')";
@@ -102,6 +102,26 @@ class DB_tables {
         $stm = $db->prepare($sql);
         if($stm->execute()) {
             return TRUE;
+        }
+    }
+    public function deleteAcc(array $data, $db): bool
+    {
+        $sql = "DELETE FROM usuarios WHERE nome='$data[0]' AND pseudoId='$data[1]' AND email='$data[2]'";
+        $stm = $db->prepare($sql);
+
+        if($stm->execute()) {
+            return true;
+        }
+    }
+
+    public function changePass(array $data, $db): bool
+    {
+        $hashedPass = password_hash($data[1], PASSWORD_BCRYPT);
+        $sql = "UPDATE usuarios SET senha = '$hashedPass' WHERE email='$data[0]'";
+        $stm = $db->prepare($sql);
+
+        if($stm->execute()) {
+            return true;
         }
     }
 

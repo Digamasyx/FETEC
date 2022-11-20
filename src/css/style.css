@@ -233,7 +233,7 @@ footer {
   font-family: "Montserrat", sans-serif !important;
   font-weight: light;
 }
-#nav_text, #nav_text_, .bi:not(.bi-bug, .bi-box-arrow-right) {
+#nav_text, #nav_text_, .bi:not(.bi-bug, .bi-box-arrow-right, .bi-person-x-fill) {
   font-size: 1.349em;
   background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(102,102,102,1) 50%, rgb(4, 168, 39) 100%);
   background-clip: text;

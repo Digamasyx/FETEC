@@ -7,6 +7,36 @@ export default class Getter {
         this.#errTypes = ["Conta Existente", "Valores Incorretos Inseridos", "Post Com O Mesmo Nome Já Existe", "Senha Incorreta"];
     }
 
+
+    deleteAcc(event) {
+        const req = new XMLHttpRequest();
+
+        event.disabled = !event.disabled
+
+        event.addEventListener("click", () => {
+            req.open("POST", "./../../src/php/fun/deleteAcc.php", false);
+            req.send(null);
+            if (req.responseText === "ACCDELETED") window.location.reload();
+        })
+    }
+
+    changePass(data, event) {
+        const req = new XMLHttpRequest();
+
+        if (data.pass.value !== data.confirm.value) {
+            data.pass.classList.add("is-invalid")
+            data.confirm.classList.add("is-invalid")
+        } else if (data.pass.value === data.confirm.value) {
+            event.addEventListener("click", () => {
+                req.open("POST", "./../../src/php/fun/changePass.php", false);
+                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                req.send("passChange="+data.pass.value);
+
+                if (req.responseText === "PASSCHANGED") window.location.reload();
+            })
+        }
+    } 
+
     destroySession() {
         const req = new XMLHttpRequest();
         req.open("get", "./../../src/php/fun/sessionDestroy.php", false);

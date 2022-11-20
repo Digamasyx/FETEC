@@ -36,7 +36,8 @@ subModal.addEventListener('show.bs.modal', (event) => {
         fullDesc: subModal.querySelector("#subModalFullDesc").innerText = data[clickedElement.idInt]['fullDesc'],
         nome: subModal.querySelector("#subModalName").innerText = data[clickedElement.idInt]['nomePl'],
         regiao: subModal.querySelector("#subModalLocal").innerText = REGIOES[data[clickedElement.idInt]['regiao']],
-        nomeCientifico: subModal.querySelector("#subModalSurName").innerText = data[clickedElement.idInt]['nomeCientifico']
+        nomeCientifico: subModal.querySelector("#subModalSurName").innerText = data[clickedElement.idInt]['nomeCientifico'],
+        criador: subModal.querySelector("#subModalCreator").innerText = data[clickedElement.idInt]['criador'].replace("_", "#")
     }
 
 })
@@ -65,7 +66,41 @@ subCanvas.addEventListener("show.bs.offcanvas", (event) => {
 })
 
 subOffCanvas.addEventListener("show.bs.offcanvas", (event) => {
+    let isValid;
     const exit = document.getElementById("exitBtn");
+    const passChang = {
+        pass: document.getElementById("passChange"),
+        confirm: document.getElementById("passChangeConfirm")
+    };
+    const checkBox = document.getElementById("confirmCheck");
+    const changButton = document.getElementById("btnChang");
+
+    const msgConf = document.getElementById("accDelete");
+    const confCheck = document.getElementById("confirmDelete");
+    const confBtn = document.getElementById("deleteConfirm");
+
+    msgConf.addEventListener("keyup", () => {
+        if (msgConf.value.toLowerCase() !== "confirmo") {
+            msgConf.classList.remove("is-valid");
+            msgConf.classList.add("is-invalid");
+            isValid = false;
+        } else {
+            msgConf.classList.remove("is-invalid");
+            msgConf.classList.add("is-valid");
+            isValid = true;
+        }
+    })
+
+    confCheck.addEventListener("change", () => {
+        if (isValid === true) {
+            Getter_.deleteAcc(confBtn);
+        }
+    })
+
+    checkBox.addEventListener("change", () => {
+        Getter_.changePass(passChang, changButton);
+        changButton.disabled = !changButton.disabled;
+    })
 
     exit.addEventListener("click", () => {
         Getter_.destroySession();

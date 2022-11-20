@@ -9,7 +9,7 @@ if (!$_SERVER["REQUEST_METHOD"] === "POST" or !$_SERVER["REQUEST_METHOD"] === "G
 
 $i = 1;
 
-$targetDir = "files/".$_SESSION["user"]."/";
+$targetDir = "files/".$_SESSION["user"]."_".$_SESSION["pseudoid"]."/";
 $fileName = basename($_FILES["file"]["name"]);
 $targetPath = $targetDir . $fileName;
 $fileName_ = pathinfo($targetPath, PATHINFO_FILENAME);
@@ -24,7 +24,7 @@ while (true) {
     }
 }
 
-$data = array($_POST["nomePL"], $_POST["regiao"], $_POST["shortDesc"], $_SESSION["user"], $_POST["fullDesc"], $_POST["nomeCientifico"]);
+$data = array($_POST["nomePL"], $_POST["regiao"], $_POST["shortDesc"], $_SESSION["user"]."_".$_SESSION["pseudoid"], $_POST["fullDesc"], $_POST["nomeCientifico"]);
 
 
 [$class, $result] = postFile([$targetDir, $fileName, $targetPath, $fileType], $data);

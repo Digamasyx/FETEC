@@ -14,6 +14,7 @@ if ($__exitSession) {
 
 $dataUser = (string) $_SESSION["user"];
 $datapseudoId = (int) $_SESSION["pseudoid"];
+$dataEmail = (string) $_SESSION["email"];
 
 $elements = DB_tables::getFiles(db);
 $qtdElement = count(DB_tables::getFiles(db));
@@ -115,6 +116,65 @@ $rngElements = generateNumber($elements);
     </div>
     <div class="offcanvas-body">
         <p class="fs-5">Olá! <?php echo($__isSessionSet ? "$dataUser" : "default") . "#$datapseudoId"; ?></p>
+        <div class="mb-3 row">
+          <label for="staticEmail" class="col-form-label col-sm-2"><b>Email: </b></label>
+          <div class="col-sm-10">
+            <input type="text" readonly id="staticEmail" class="form-control-plaintext" value="<?php echo($__isSessionSet ? "$dataEmail" : "default")?>">
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <div class="accordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                  Alterar Senha
+                </button>
+              </h2>
+              <div class="accordion-collapse collapse" id="collapseOne">
+                <div class="accordion-body">
+                  <form method="POST" class="form-floating">
+                    <div class="form-floating mb-3">
+                      <input type="password" name="passChange" id="passChange" class="form-control" placeholder="Senha" required>
+                      <label for="passChange"><b>Senha</b></label>
+                      <div class="invalid-feedback">As senhas inseridas são diferentes</div>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="password" name="passChangeConfirm" id="passChangeConfirm" class="form-control" placeholder="Senha" required>
+                      <label for="passChangeConfirm"><b>Confirmar Senha</b></label>
+                      <div class="invalid-feedback">As senhas inseridas são diferentes</div>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="confirmCheck" name="" class="form-check-input" required>
+                      <label for="confirmCheck" class="form-check-label" required>Desejo Alterar Minha Senha.</label>
+                    </div>
+                    <button id="btnChang" class="btn btn-outline-success mt-1" disabled>Alterar Senha</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo">Excluir Conta</button>
+              </h2>
+              <div class="accordion-collapse collapse" id="collapseTwo">
+                <div class="accordion-body">
+                  <p><b>Deseja Deletar a Conta?</b></p>
+                  <form method="post" class="form-floating">
+                    <small><b>Se deseja deletar sua conta insira "Confirmo" na caixa abaixo</b></small>
+                    <div class="form-floating mt-3">
+                      <input type="text" id="accDelete" class="form-control" placeholder="a" required>
+                      <label for="accDelete">Texto De Confirmação</label>
+                    </div>
+                    <div class="form-check py-3">
+                      <input type="checkbox" id="confirmDelete" class="form-check-input " required>
+                      <label for="confirmDelete" class="form-check-label">Você tem certeza essa será uma ação irrevesivel.</label></div>
+                  </form>
+                  <button id="deleteConfirm" class="btn btn-outline-danger" disabled><i class="bi bi-person-x-fill pr-1" style="padding-right: 0.75rem"></i>Deletar Conta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button id="exitBtn" type="button" class="btn btn-outline-danger">
             <i class="bi bi-box-arrow-right"></i>
@@ -159,6 +219,10 @@ $rngElements = generateNumber($elements);
                   <div><b>Nome Da Planta:</b> <p id="subModalName"></p></div>
                   <div><b>Nome Cientifico Da Planta:</b> <p id="subModalSurName"></p></div>
                   <div><b>Região:</b> <p id="subModalLocal"></p></div>
+                  <div>
+                    <b>Post Criado Por:</b>
+                    <p id="subModalCreator"></p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -305,6 +369,7 @@ $rngElements = generateNumber($elements);
               <div class="card-body">
                 <h5 class="card-title"><?=$elements[$i]['nomePl']?></h5>
                 <p class="card-text"><?=$elements[$i]['shortDesc']?></p>
+                <p style="display:none;"><?php echo $elements[$i]["criador"]?></p>
               </div>
             </div>
           <?php $i++; ?>

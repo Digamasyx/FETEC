@@ -7,7 +7,7 @@ require_once(__lroot__."\imports.php");
 require_once(__broot__."\src\php\def\definitions.php");
 
 function postMethod() {
-    if(!empty($_POST["usuario"]) and !empty($_POST["email"]) and !empty($_POST["senha"])) {
+    if(!empty($_POST["usuario"]) and !empty($_POST["email"]) and !empty($_POST["senha_"])) {
     $data = array($_POST["usuario"], password_hash($_POST["senha_"], PASSWORD_BCRYPT), $_POST["email"], $_POST["pseudoid"]);
     $db_c = new DB_tables(db);
     $result = $db_c->postData($data, db);
@@ -57,6 +57,7 @@ function postFile(array $options, array $data): ?array {
 
         return [$db_f, $result];
       }
+      return false;
     }
   }
 }
