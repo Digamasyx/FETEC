@@ -20,13 +20,13 @@ export default class Getter {
         })
     }
 
-    changePass(data, event) {
+    changePass(data, event, main) {
         const req = new XMLHttpRequest();
-
-        if (data.pass.value !== data.confirm.value) {
-            data.pass.classList.add("is-invalid")
-            data.confirm.classList.add("is-invalid")
-        } else if (data.pass.value === data.confirm.value) {
+        if (data.pass.value !== data.confirm.value) main.checked = !main.checked;
+        if (data.pass.value === data.confirm.value) {
+            if (event.disabled) { 
+                event.disabled = !event.disabled; 
+            }
             event.addEventListener("click", () => {
                 req.open("POST", "./../../src/php/fun/changePass.php", false);
                 req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

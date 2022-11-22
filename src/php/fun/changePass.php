@@ -6,9 +6,9 @@ use DatabaseCon\DB_tables;
 session_start(["name" => "Session"]);
 if (isset($_POST["passChange"])) {
     $data = (array) [$_SESSION["email"], $_POST["passChange"]];
-    $db = new DB_tables(db);
+    $db = new DB_tables(dsn, user, password);
 
-    $result = $db->changePass($data, db);
+    $result = $db->changePass($data);
     session_destroy();
 
     if($result) echo "PASSCHANGED";

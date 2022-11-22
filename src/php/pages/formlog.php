@@ -9,8 +9,8 @@ require_once("base.php");
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if(!empty($_POST["email_"]) and !empty($_POST["senha"])) {
         $data_Log = array($_POST["email_"], $_POST["senha"]);
-        $db_g = new DB_tables(db);
-        $getResult = $db_g->getData($data_Log, db);
+        $db_g = new DB_tables(dsn, user, password);
+        $getResult = $db_g->getData($data_Log);
 
         if (!$getResult) {
             $set = (bool) setcookie("userLogged", "INCORRECTPASS", time()+1, "/");

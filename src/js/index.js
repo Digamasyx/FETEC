@@ -72,6 +72,7 @@ subOffCanvas.addEventListener("show.bs.offcanvas", (event) => {
         pass: document.getElementById("passChange"),
         confirm: document.getElementById("passChangeConfirm")
     };
+
     const checkBox = document.getElementById("confirmCheck");
     const changButton = document.getElementById("btnChang");
 
@@ -97,9 +98,36 @@ subOffCanvas.addEventListener("show.bs.offcanvas", (event) => {
         }
     })
 
+    passChang.pass.addEventListener("keyup", () => {
+        if (passChang.pass.value !== passChang.confirm.value) {
+            passChang.pass.classList.remove("is-valid")
+            passChang.confirm.classList.remove("is-valid")
+            passChang.pass.classList.add("is-invalid")
+            passChang.confirm.classList.add("is-invalid")
+        } else {
+            passChang.pass.classList.remove("is-invalid")
+            passChang.confirm.classList.remove("is-invalid")
+            passChang.pass.classList.add("is-valid")
+            passChang.confirm.classList.add("is-valid")
+        }
+    })
+
+    passChang.confirm.addEventListener("keyup", () => {
+        if (passChang.pass.value !== passChang.confirm.value) {
+            passChang.pass.classList.remove("is-valid")
+            passChang.confirm.classList.remove("is-valid")
+            passChang.pass.classList.add("is-invalid")
+            passChang.confirm.classList.add("is-invalid")
+        } else {
+            passChang.pass.classList.remove("is-invalid")
+            passChang.confirm.classList.remove("is-invalid")
+            passChang.pass.classList.add("is-valid")
+            passChang.confirm.classList.add("is-valid")
+        }
+    })
+
     checkBox.addEventListener("change", () => {
-        Getter_.changePass(passChang, changButton);
-        changButton.disabled = !changButton.disabled;
+        Getter_.changePass(passChang, changButton, checkBox);
     })
 
     exit.addEventListener("click", () => {

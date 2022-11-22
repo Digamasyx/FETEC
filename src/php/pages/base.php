@@ -9,8 +9,8 @@ require_once(__broot__."\src\php\def\definitions.php");
 function postMethod() {
     if(!empty($_POST["usuario"]) and !empty($_POST["email"]) and !empty($_POST["senha_"])) {
     $data = array($_POST["usuario"], password_hash($_POST["senha_"], PASSWORD_BCRYPT), $_POST["email"], $_POST["pseudoid"]);
-    $db_c = new DB_tables(db);
-    $result = $db_c->postData($data, db);
+    $db_c = new DB_tables(dsn, user, password);
+    $result = $db_c->postData($data);
 
     return [$db_c, $result];
   }
@@ -19,8 +19,8 @@ function postMethod() {
 function getMethod() {
   if(!empty($_POST["email_"]) and !empty($_POST["senha"])) {
     $data_Log = array($_POST["email_"], $_POST["senha"]);
-    $db_g = new DB_tables(db);
-    $getResult = $db_g->getData($data_Log, db);
+    $db_g = new DB_tables(dsn, user, password);
+    $getResult = $db_g->getData($data_Log);
     return [$db_g, $getResult];
   }
 }
@@ -51,9 +51,9 @@ function postFile(array $options, array $data): ?array {
     if(in_array($options[3], tiposPermitidos)) {
 
       if(move_uploaded_file($_FILES["file"]["tmp_name"], $options[2])) {
-        $db_f = new DB_tables(db);
+        $db_f = new DB_tables(dsn, user, password);
 
-        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3], $data[4], $data[5]], db);
+        $result = $db_f->postFiles([$data[0], $data[1], $options[1], $options[2], $data[2], $data[3], $data[4], $data[5]]);
 
         return [$db_f, $result];
       }

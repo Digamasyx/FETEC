@@ -2,25 +2,35 @@
 namespace DatabaseCon;
 
 use PDO;
-use PDOStatement;
 
-class DatabaseCon {
+abstract class DatabaseCon {
+    protected $db;
     public int $errCode;
-    public function __construct(string $dsn, string $username, string $password)
+    protected function __construct(string $dsn, string $username, string $password)
     {
         try {
-            define('db', new \PDO($dsn, $username, $password));
+            $this->db = new PDO($dsn, $username, $password);
         } catch (\PDOException $e) {
             $this->errCode = 1;
+            return $this->errCode;
         } finally {
             $this->errCode = 0;
+            return $this->errCode;
         }
     }
 }
 
-class DB_tables {
+class DB_tables extends DatabaseCon {
     public $row;
-    public function __construct($db)
+    
+    public function __construct($dsn, $user, $pass)
+    {
+        parent::__construct($dsn, $user, $pass);
+        if ($this->errCode === 0) {
+            $this->__constructDB();
+        }
+    }
+    public function __constructDB()
     {
         $sql = "CREATE TABLE IF NOT EXISTS usuarios (
         nome varchar(255) NOT NULL,
@@ -40,12 +50,15 @@ class DB_tables {
         criador varchar(255) NOT NULL,
         fullDesc text NOT NULL,
         idPost INT NOT NULL AUTO_INCREMENT PRIMARY KEY)";
-        $stm = $db->prepare($sql);
-        $hasCreated = ($stm->execute()) ? true : false;
+        if ($this->errCode === 0) {
 
-        if ($hasCreated) {
-            $stm = $db->prepare($sql_);
-            $stm->execute();
+            $stm = $this->db->prepare($sql);
+            $hasCreated = ($stm->execute()) ? true : false;
+            
+            if ($hasCreated) {
+                $stm = $this->db->prepare($sql_);
+                $stm->execute();
+            }
         }
     }
 
@@ -54,17 +67,17 @@ class DB_tables {
      * $post[1] == Senha (Bycrypt)
      * $post[2] == Email
      */
-    public function postData(array $post, $db): mixed {
+    public function postData(array $post): mixed {
         date_default_timezone_set("America/Bahia");
         $data = date("Y-m-d H:i:s");
         $test_exist = "SELECT COUNT(email) FROM usuarios WHERE email = '$post[2]'";
-        $exec = $db->prepare($test_exist);
+        $exec = $this->db->prepare($test_exist);
         $exec->execute();
         if ($exec->fetchColumn() > 0) {
             return FALSE;
         }
         $sql = "INSERT INTO usuarios (nome, dataCriacao, senha, email, pseudoId) VALUES ('$post[0]', '$data', '$post[1]', '$post[2]', '$post[3]')";
-        $stm = $db->prepare($sql);
+        $stm = $this->db->prepare($sql);
         $stm->execute();
 
         return TRUE;
@@ -75,10 +88,10 @@ class DB_tables {
      * $get[1] == Senha já com bycrpt
      *
     */
-    public function getData(array $get, $db): mixed {
+    public function getData(array $get): mixed {
 
         $sql = "SELECT * FROM usuarios WHERE email = '$get[0]'";
-        $stm = $db->prepare($sql);
+        $stm = $this->db->prepare($sql);
         $stm->execute();
         $this->row = $stm->fetch(PDO::FETCH_ASSOC);
         if(password_verify($get[1], $this->row["senha"])) {
@@ -88,47 +101,47 @@ class DB_tables {
         }
     }
     
-    public function postFiles(array $data_, $db): mixed
+    public function postFiles(array $data_): mixed
     {
         $data = date("Y-m-d H:i:s");
         $sql = "INSERT INTO posts (nomePl, dataCriacao, regiao, nomeImagem, caminho, shortDesc, criador, fullDesc, nomeCientifico) VALUES ('$data_[0]', '$data', '$data_[1]', '$data_[2]', '$data_[3]', '$data_[4]', '$data_[5]', '$data_[6]', '$data_[7]')";
         $test_exist = "SELECT * FROM posts WHERE nomePl = '$data_[0]'";
-        $exec = $db->prepare($test_exist);
+        $exec = $this->db->prepare($test_exist);
         $exec->execute();
         if ($exec->fetchColumn() !== FALSE) {
             return FALSE;
         }
 
-        $stm = $db->prepare($sql);
+        $stm = $this->db->prepare($sql);
         if($stm->execute()) {
             return TRUE;
         }
     }
-    public function deleteAcc(array $data, $db): bool
+    public function deleteAcc(array $data): bool
     {
         $sql = "DELETE FROM usuarios WHERE nome='$data[0]' AND pseudoId='$data[1]' AND email='$data[2]'";
-        $stm = $db->prepare($sql);
+        $stm = $this->db->prepare($sql);
 
         if($stm->execute()) {
             return true;
         }
     }
 
-    public function changePass(array $data, $db): bool
+    public function changePass(array $data): bool
     {
         $hashedPass = password_hash($data[1], PASSWORD_BCRYPT);
         $sql = "UPDATE usuarios SET senha = '$hashedPass' WHERE email='$data[0]'";
-        $stm = $db->prepare($sql);
+        $stm = $this->db->prepare($sql);
 
         if($stm->execute()) {
             return true;
         }
     }
 
-    public static function getFiles($db): array
+    public function getFiles(): array
     {
         $sql = "SELECT * FROM posts";
-        $stm = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stm = $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stm->execute();
         
         $data = $stm->fetchAll();
@@ -137,18 +150,18 @@ class DB_tables {
 
         return $data;
     }
-    public static function pushData($db): array {
+    public function pushData(): array {
         $sql = "SELECT nome, email from usuarios";
-        $stm = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stm = $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stm->execute();
 
         $data = (array) $stm->fetchAll();
 
         return $data;
     }
-    public static function getPseudoId($db, int $value): mixed {
+    public function getPseudoId(int $value): mixed {
         $sql = "SELECT pseudoId FROM usuarios WHERE pseudoId=$value";
-        $stm = $db->prepare($sql);
+        $stm = $this->db->prepare($sql);
         $stm->execute();
 
         if ($stm->fetchColumn() !== FALSE) {
@@ -160,10 +173,10 @@ class DB_tables {
 
     }
 
-    public static function userPseudoId(int $max, int $min, $db): int {
-           $rand = (int) random_int($min, $max);
+    public function userPseudoId(int $max, int $min, ): int {
 
-           while(DB_tables::getPseudoId($db, $rand)) {
+           $rand = (int) random_int($min, $max);
+           while($this->getPseudoId($rand)) {
             echo $rand . "\n";
             $rand = (int) random_int($min, $max);
         }

@@ -1,7 +1,7 @@
 <?php
 use DatabaseCon\DB_tables;
 session_start(["name" => "Session"]);
-require_once(dirname(__FILE__)."\src\php\imports.php");
+require_once(dirname(__FILE__)."/src/php/imports.php");
 $__isSessionSet = (isset($_SESSION["id"]) and gettype($_SESSION["id"]) === "integer") ? true : false;
 
 
@@ -16,8 +16,12 @@ $dataUser = (string) $_SESSION["user"];
 $datapseudoId = (int) $_SESSION["pseudoid"];
 $dataEmail = (string) $_SESSION["email"];
 
-$elements = DB_tables::getFiles(db);
-$qtdElement = count(DB_tables::getFiles(db));
+$db_tables = new DB_tables(dsn, user, password);
+
+$elements = $db_tables->getFiles();
+
+$qtdElement = count($db_tables->getFiles());
+
 $i = 0;
 $rngElements = generateNumber($elements);
 ?>
