@@ -13,7 +13,7 @@
 
 Este projeto foi feito com o intuito de compartilhar informações sobre plantas medicinais das Regiões do brasil, para a FETEC III do colegio CETEPI I localizado na (Zona Urbana - Ac. dos Estudantes, S/N - Amaury Alves de Menezes, Paulo Afonso - BA).
 
-![Website](https://img.shields.io/website?down_color=red&down_message=Offline&up_color=blue&up_message=Online&url=http%3A%2F%2Fgreen-med.rf.gd%2F)
+[![Website](https://img.shields.io/website?down_color=red&down_message=Offline&up_color=blue&up_message=Online&url=http%3A%2F%2Fgreen-med.rf.gd%2F)](http://green-med.rf.gd/)
 
 ## Alterações necessarias para funcionar corretamente
 
