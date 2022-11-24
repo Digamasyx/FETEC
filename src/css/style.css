@@ -177,7 +177,7 @@ footer {
 .form-container-sub input[type=text], .form-container-sub input[type=password] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 5px 0 22px;
   border: none;
   background: #f1f1f1;
 }
