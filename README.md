@@ -33,6 +33,11 @@ No arquivo definitions.php na pasta "./src/php/def/".
 
 ## Contribuir
 
-Como o projeto está sobre a licença ![GitHub](https://img.shields.io/github/license/digamasyx/fetec) a suas condições são
+Como o projeto está sobre a licença [GNU LGPL-3.0](https://choosealicense.com/licenses/lgpl-3.0/) a suas condições são
 
-![Conditions](https://imgur.com/bncPKFy)
+![Conditions](https://i.imgur.com/bncPKFy.png)
+
+
+## Licença
+
+![GitHub](https://img.shields.io/github/license/digamasyx/fetec)
