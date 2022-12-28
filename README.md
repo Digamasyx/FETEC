@@ -5,7 +5,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/digamasyx/FETEC?color=%23f0f)
 
 
-![GitHub top language](https://img.shields.io/github/languages/top/digamasyx/FETEC?color=%23f0f)![Lines of code](https://img.shields.io/tokei/lines/github/digamasyx/FETEC)
+![GitHub top language](https://img.shields.io/github/languages/top/digamasyx/FETEC?color=%23f0f) ![Lines of code](https://img.shields.io/tokei/lines/github/digamasyx/FETEC)
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/digamasyx/FETEC?color=f0f)
 
